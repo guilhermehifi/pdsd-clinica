@@ -1,0 +1,171 @@
+body{
+	margin:0;
+	padding:0;
+	background:url(/public/images/bg.png) repeat-x ;
+}
+
+#estrutura{
+	margin-bottom:20px;
+	border:0;
+	vertical-align:top;
+	position:relative;
+	width:996px;
+}
+
+#logo{float:left;
+	margin:0 50px;
+	padding:0;
+	position:absolute;
+}
+
+#menu{
+	color:#be1e2d;
+	width:900px;
+	margin:0 auto;
+	padding:101px 120px 40px 0;
+	display:block;
+	background:url(/public/images/linha.png) no-repeat bottom right;
+	height:110px;
+}
+
+#menu ul{
+	display:block;
+	float:right;
+	*margin-top:70px;
+	margin-left:270px;
+	*width:800px;
+}
+
+#menu ul li{
+	display:inline-block;
+	*display:inline;
+	font: bold 25px "Calibri", Arial;
+	margin:40px 0;
+	*padding:5px;
+}
+
+li a{
+	color:#be1e2d;
+	text-decoration:none;
+	width:auto;
+	min-width:150px;
+	padding:10px 10px;
+	border-radius:5px;
+}
+
+li a:hover{
+	text-shadow:2px 0px 1px black;
+	color:white;
+	background:#be1e2d;
+}
+
+#conteudo{
+	width:810px;
+	display:block;
+	margin:40px 0;
+	padding-left:210px;
+}
+
+#conteudo p.index{
+	width:480px;
+	text-align:justify;
+	color:#333;
+	font:14px "Calibri", Arial;
+	margin-left:30px;
+}
+
+h2 {
+	padding:10px;
+	margin:0 30px;
+	color: #ebebeb;
+	font: bold 30px "Calibri", Arial;
+	background:#be1e2d;
+	border-radius:10px;
+}
+
+#foto{
+	float:right;
+	border:1px solid #be1e2d;
+	border-radius:10px;
+}
+
+#rodape{
+	height:70px;
+	display:block;
+	background:#643200;
+	padding:15px;
+}
+
+#rodape p{
+	width:97%;
+	color:white;
+	font: 14px "Calibri", Arial;
+	text-align:center;
+}
+
+
+
+
+
+
+
+
+
+
+
+#login-box {
+	width:533px;
+	height: 300px;
+	padding: 0 76px;
+	font:14px "Calibri", Arial;
+}
+
+#login-box img {
+	border:none;
+}
+
+#login-box-name {
+	float: left;
+	display:inline;
+	width:130px;
+	text-align: right;
+	padding: 14px 10px 0 0;
+	margin:15px 0 7px 0;
+}
+
+#login-box-field {
+	float: left;
+	display:inline;
+	width:360px;
+	margin:0;
+	margin:15px 0 7px 0;
+}
+
+
+.form-login  {
+	width: 355px;
+	padding: 10px 4px 6px 3px;
+	border: 1px solid #be1e2d;
+	border-radius:5px;
+	background-color:#eee;
+	font-size: 16px;
+	color: #be1e2d;
+	float:right;
+}
+
+
+.login-box-options  {
+	clear:both;
+	color: #333;
+	font-size: 12px;
+	width:400px;
+	display:block;
+	margin-left:133px;
+}
+
+.login-box-options a {
+	color: #333;
+	font-size: 12px;
+	margin-left:50px;
+	text-decoration:none;
+}
