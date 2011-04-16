@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
     <head>
         <title>#{get 'title' /}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
         #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon3.png'}">
         <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
         #{get 'moreScripts' /}
     </head>
     <body>
+		<div id="estrutura"><img src="/public/images/logo.png" id="logo";/>
+    		<div id="menu">
+    			<ul>
+    				<li ><a href="@{Application.index}">Principal</a></li>
+    				<li>&bull;</li>
+    				<li><a href="#">Equipe</a></li>
+    				<li>&bull;</li>
+    				<li><a href="#">Servi&ccedil;os</a></li>
+    				<li>&bull;</li>
+    				<li><a href="sessao">Login</a></li>
+    				<li>&bull;</li>
+    				<li><a href="#">Contato</a></li>
+    			</ul>
+    		</div>
+    	<div id="conteudo">
+    <!-- include de cada p�gina -->
         #{doLayout /}
+    </div>
+    <div id="rodape">
+    <p>
+		Projeto de Desenvolvimento de Sistema Distribu&iacute;do do curso de TADS - 4&ordm; Per&iacute;odo 2011.1<br/>
+		Instituto Federal de Educa&ccedil;&atilde;o, Ci&ecirc;ncia e Tecnologia do Rio Grande do Norte<br/>
+		Campus Natal-Central
+	</p>
+    </div>
     </body>
 </html>
