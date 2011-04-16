@@ -8,6 +8,9 @@
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon3.png'}">
         <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
+        <script src="@{'/public/javascripts/jquery.ui.core.js'}" type="text/javascript" charset="utf-8"></script>
+        <script src="@{'/public/javascripts/jquery.ui.widget.js'}" type="text/javascript" charset="utf-8"></script>
+        <script src="@{'/public/javascripts/jquery.ui.datepicker.js'}" type="text/javascript" charset="utf-8"></script>
         #{get 'moreScripts' /}
     </head>
     <body>
@@ -20,7 +23,7 @@
     				<li>&bull;</li>
     				<li><a href="#">Servi&ccedil;os</a></li>
     				<li>&bull;</li>
-    				<li><a href="sessao">Login</a></li>
+    				<li><a href="@{Application.login}">Login</a></li>
     				<li>&bull;</li>
     				<li><a href="#">Contato</a></li>
     			</ul>
