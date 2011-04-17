@@ -39,7 +39,7 @@ body{
 #menu ul li{
 	display:inline-block;
 	*display:inline;
-	font: bold 25px "Calibri", Arial;
+	font: bold 20px "Calibri", Arial;
 	margin:40px 0;
 	*padding:5px;
 }
