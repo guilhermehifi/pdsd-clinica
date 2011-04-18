@@ -1,6 +1,8 @@
 package models;
 
-public class Medico {
+import play.db.jpa.Model;
+
+public class Medico extends Model{
 	
 	private String nome;
 	private String crm;
