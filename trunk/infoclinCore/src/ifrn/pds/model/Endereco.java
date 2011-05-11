@@ -1,5 +1,10 @@
 package ifrn.pds.model;
 
+import org.hibernate.*;
+import org.hibernate.annotations.Entity;
+
+@Entity
+
 	public class Endereco {
 		
 		private String logradouro;
