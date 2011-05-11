@@ -1,3 +1,7 @@
+package ifrn.pds.fachada.rmi;
+
+import ifrn.pds.model.Usuario;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
