@@ -1,11 +1,18 @@
 package ifrn.pds.model;
 
 import org.hibernate.*;
+
 import org.hibernate.annotations.Entity;
+import javax.persistence.*;
 
 @Entity
-
+@Table(name="endereco", schema="public")
 	public class Endereco {
+		
+		@Id
+		@GeneratedValue(strategy = GenerationType.SEQUENCE)
+		@Column(name="id")
+		private int id;
 		
 		private String logradouro;
 		private String numero;
@@ -66,6 +73,14 @@ import org.hibernate.annotations.Entity;
 		}
 		public String getEstado() {
 			return estado;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public int getId() {
+			return id;
 		}
 	
 

@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="jta-1.1.jar"/>
 	<classpathentry kind="lib" path="slf4j-api-1.5.8.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/annotation"/>
+	<classpathentry kind="lib" path="postgresql-8.4-701.jdbc4.jar"/>
+	<classpathentry kind="lib" path="hibernate.cfg.xml"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
