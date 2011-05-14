@@ -1,23 +1,37 @@
 package ifrn.pds.model;
+
 import java.io.Serializable;
 
-public abstract class Usuario implements Serializable{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Usuario")
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
-	private String senha;
 	private String login;
-	private Endereco endereco;
+	private String senha;
 	private String nome;
-	private String cpf;
+	private int cpf;
+	private Endereco endereco;
 
-	public Usuario(int id, String senha, String login, Endereco endereco, String nome, String cpf){
-		this.setId(id);
-		this.senha=senha;
-		this.login=login;
-		this.setEndereco(endereco);
-		this.nome=nome;
-		this.cpf=cpf;
+	public Usuario() {
+	}
+
+	public Usuario(String senha, String login, Endereco endereco,
+			String nome, int cpf) {
+		this.senha = senha;
+		this.login = login;
+		this.endereco = endereco;
+		this.nome = nome;
+		this.cpf = cpf;
 	}
 
 	public void setSenha(String senha) {
@@ -44,13 +58,6 @@ public abstract class Usuario implements Serializable{
 		return nome;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
@@ -66,6 +73,14 @@ public abstract class Usuario implements Serializable{
 
 	public int getId() {
 		return id;
+	}
+
+	public int getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(int cpf) {
+		this.cpf = cpf;
 	}
 
 }

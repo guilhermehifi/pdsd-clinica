@@ -1,40 +1,56 @@
 package ifrn.pds.model;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Receita")
 public class Receita {
 	private int id;
-	private Procedimento idProc;
-	private Paciente idPaciente;
-	private Medico idMedico;
 	private String receituario;
-	public void setId(int id) {
-		this.id = id;
+	@OneToOne
+	private Procedimento procedimento;
+	@OneToOne
+	private Prontuario prontuario;
+
+	public Receita() {
+
 	}
-	public int getId() {
-		return id;
+
+	public Receita(String receituario, Procedimento procedimento,
+			Prontuario prontuario) {
+		this.receituario = receituario;
+		this.procedimento = procedimento;
+		this.prontuario = prontuario;
 	}
-	public void setIdProc(Procedimento idProc) {
-		this.idProc = idProc;
+
+	public String getReceituario() {
+		return receituario;
 	}
-	public Procedimento getIdProc() {
-		return idProc;
-	}
-	public void setIdPaciente(Paciente idPaciente) {
-		this.idPaciente = idPaciente;
-	}
-	public Paciente getIdPaciente() {
-		return idPaciente;
-	}
-	public void setIdMedico(Medico idMedico) {
-		this.idMedico = idMedico;
-	}
-	public Medico getIdMedico() {
-		return idMedico;
-	}
+
 	public void setReceituario(String receituario) {
 		this.receituario = receituario;
 	}
-	public String getReceituario() {
-		return receituario;
+
+	public Procedimento getProcedimento() {
+		return procedimento;
+	}
+
+	public void setProcedimento(Procedimento procedimento) {
+		this.procedimento = procedimento;
+	}
+
+	public Prontuario getProntuario() {
+		return prontuario;
+	}
+
+	public void setProntuario(Prontuario prontuario) {
+		this.prontuario = prontuario;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }
