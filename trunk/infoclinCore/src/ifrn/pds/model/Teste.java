@@ -17,9 +17,9 @@ public class Teste {
 		Session session = sf.openSession();
 		//Cria uma transação
 		Transaction tx = session.beginTransaction();
-		Endereco endereco = new Endereco("a", "b,", "c", "d", "e", "f", "g", "r");
+		//Endereco endereco = new Endereco("a", "b,", "c", "d", "e", "f", "g", "r");
 		
-		session.save(endereco);
+		//session.save(endereco);
 		tx.commit();
 		session.close();
 		
