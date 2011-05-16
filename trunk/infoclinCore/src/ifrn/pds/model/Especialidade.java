@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +15,9 @@ public class Especialidade {
 	private int id;
 
 	private String especialidade;
+	
+	@ManyToOne
+	private Medico medico;
 
 	public Especialidade(String especialidade) {
 		this.especialidade = especialidade;
@@ -33,5 +37,13 @@ public class Especialidade {
 
 	public int getId() {
 		return id;
+	}
+
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
 	}
 }

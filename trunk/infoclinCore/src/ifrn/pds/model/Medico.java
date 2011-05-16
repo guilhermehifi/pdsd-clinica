@@ -3,10 +3,10 @@ package ifrn.pds.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,36 +15,29 @@ public class Medico extends Usuario {
 
 	private static final long serialVersionUID = 13L;
 
-	@OneToMany(mappedBy = "especialidade", cascade = CascadeType.ALL)
-	@JoinColumn(name = "especialidade")
-	private List<Especialidade> especialidades;
+	@JoinColumn(name = "Especialidade")
+	@OneToOne
+	private Especialidade especialidade;
 
-	@OneToMany(mappedBy = "procedimento", cascade = CascadeType.ALL)
-	@JoinColumn(name = "procedimento")
+	@JoinColumn(name = "Procedimento")
+	@OneToMany
 	private List<Procedimento> procedimentos;
-
-	@OneToMany(mappedBy = "agenda", cascade = CascadeType.ALL)
+	
+	@JoinColumn(name="Agenda")
+	@OneToMany
 	private List<Agenda> agenda;
 
 	public Medico(String senha, String login, Endereco endereco, String nome,
-			int cpf, List<Especialidade> especialidades) {
+			int cpf, Especialidade especialidade) {
 		super(senha, login, endereco, nome, cpf);
-		this.especialidades = especialidades;
+		this.especialidade = especialidade;
 	}
 
 	public Medico() {
-		especialidades = new ArrayList<Especialidade>();
 		procedimentos = new ArrayList<Procedimento>();
 		agenda = new ArrayList<Agenda>();
 	}
 
-	public List<Especialidade> getEspecialidades() {
-		return especialidades;
-	}
-
-	public void setEspecialidades(List<Especialidade> especialidades) {
-		this.especialidades = especialidades;
-	}
 
 	public List<Procedimento> getProcedimentos() {
 		return procedimentos;
@@ -60,6 +53,14 @@ public class Medico extends Usuario {
 
 	public void setAgenda(List<Agenda> agenda) {
 		this.agenda = agenda;
+	}
+
+	public Especialidade getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(Especialidade especialidade) {
+		this.especialidade = especialidade;
 	}
 
 }

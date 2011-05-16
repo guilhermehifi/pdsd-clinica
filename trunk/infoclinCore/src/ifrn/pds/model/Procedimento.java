@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +20,11 @@ public class Procedimento {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "procedimento")
 	private TipoProcedimento tipoProcedimento;
+	@JoinColumn(name="Medico")
+	@ManyToOne
 	private Medico medico;
+	@JoinColumn(name="Paciente")
+	@ManyToOne
 	private Paciente paciente;
 	private String anamnese;
 	private String diagnostico;
