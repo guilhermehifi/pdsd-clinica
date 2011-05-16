@@ -4,30 +4,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name = "Endereco")
+@Table(name = "\"Endereco\"")
+@SequenceGenerator(name="seq", sequenceName="\"Endereco_id_seq\"")
 public class Endereco {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator="seq", strategy=GenerationType.AUTO)
 	private int id;
 	private String rua;
-	private String numero;
+	private int numero;
 	private String bairro;
 	private String complemento;
 	private String cidade;
 	private String estado;
-	private String cep;
-	
+	private int cep;
+
 	public Endereco() {
-		
+
 	}
 
-	public Endereco(String rua, String numero, String bairro,
-			String complemento, String cidade, String estado, String cep) {
+	public Endereco(String rua, int numero, String bairro, String complemento,
+			String cidade, String estado, int cep) {
 		this.rua = rua;
 		this.numero = numero;
 		this.bairro = bairro;
@@ -37,19 +38,19 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.rua = logradouro;
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
-	public String getLogradouro() {
+	public String getRua() {
 		return rua;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
@@ -77,11 +78,11 @@ public class Endereco {
 		return cidade;
 	}
 
-	public void setCep(String cep) {
+	public void setCep(int cep) {
 		this.cep = cep;
 	}
 
-	public String getCep() {
+	public int getCep() {
 		return cep;
 	}
 

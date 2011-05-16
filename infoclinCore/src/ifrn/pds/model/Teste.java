@@ -1,4 +1,6 @@
 package ifrn.pds.model;
+import ifrn.pds.dao.Dao;
+
 import org.hibernate.*;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
@@ -10,19 +12,26 @@ public class Teste {
 		// TODO Auto-generated method stub
 
 		
-		Configuration cfc = new AnnotationConfiguration();
-		cfc.configure("hibernate.cfg.xml");
+		Dao<Medico> medicoDAO = new Dao<Medico>();
+		//Dao<Endereco> enderecoDAO = new Dao<Endereco>();
 		
-		SessionFactory sf = cfc.buildSessionFactory();
-		Session session = sf.openSession();
-		//Cria uma transação
-		Transaction tx = session.beginTransaction();
-		//Endereco endereco = new Endereco("a", "b,", "c", "d", "e", "f", "g", "r");
+		Medico m = new Medico();
 		
-		//session.save(endereco);
-		tx.commit();
-		session.close();
+		//Endereco e = new Endereco();
+		//m.setNome("oi");
+		//medicoDAO.persist(m);
+		/*e.setBairro("sdfsdff");
+		e.setCep(12323);
+		e.setCidade("sdfsdf");
+		e.setComplemento("sdfds");
+		e.setEstado("sdfsdf");
+		e.setNumero(124);*/
 		
+		//u.setNome("Ronaldo");
+		//u.setEndereco(e);
+		
+		//enderecoDAO.persist(e);
+		medicoDAO.persist(m);
 		
 	}
 

@@ -6,29 +6,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable {
+@SequenceGenerator(name="seq", sequenceName="\"Usuario_id_seq\"")
+public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator="seq", strategy = GenerationType.AUTO)
 	private int id;
-	private String login;
+	private String usuario;
 	private String senha;
 	private String nome;
 	private int cpf;
+	@JoinColumn(name="Endereco")
+	@OneToOne
 	private Endereco endereco;
 
 	public Usuario() {
 	}
 
-	public Usuario(String senha, String login, Endereco endereco,
+	public Usuario(String senha, String usuario, Endereco endereco,
 			String nome, int cpf) {
 		this.senha = senha;
-		this.login = login;
+		this.usuario = usuario;
 		this.endereco = endereco;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -42,12 +48,12 @@ public class Usuario implements Serializable {
 		return senha;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsuario() {
+		return usuario;
 	}
 
 	public void setNome(String nome) {
