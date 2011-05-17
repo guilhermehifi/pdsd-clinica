@@ -6,18 +6,17 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Medico")
+@Table(name = "\"Medico\"")
 public class Medico extends Usuario {
 
 	private static final long serialVersionUID = 13L;
-
+	
 	@JoinColumn(name = "Especialidade")
-	@OneToOne
-	private Especialidade especialidade;
+	@OneToMany
+	private List<Especialidade> especialidades;
 
 	@JoinColumn(name = "Procedimento")
 	@OneToMany
@@ -28,14 +27,16 @@ public class Medico extends Usuario {
 	private List<Agenda> agenda;
 
 	public Medico(String senha, String login, Endereco endereco, String nome,
-			int cpf, Especialidade especialidade) {
+			int cpf, List<Especialidade> especialidades, List<Procedimento> procedimentos) {
 		super(senha, login, endereco, nome, cpf);
-		this.especialidade = especialidade;
+		this.especialidades = especialidades;
+		this.procedimentos = procedimentos;
 	}
-
+	
 	public Medico() {
 		procedimentos = new ArrayList<Procedimento>();
 		agenda = new ArrayList<Agenda>();
+		especialidades = new ArrayList<Especialidade>();
 	}
 
 
@@ -55,12 +56,12 @@ public class Medico extends Usuario {
 		this.agenda = agenda;
 	}
 
-	public Especialidade getEspecialidade() {
-		return especialidade;
+	public List<Especialidade> getEspecialidades() {
+		return especialidades;
 	}
 
-	public void setEspecialidade(Especialidade especialidade) {
-		this.especialidade = especialidade;
+	public void setEspecialidades(List<Especialidade> especialidades) {
+		this.especialidades = especialidades;
 	}
-
+	
 }

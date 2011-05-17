@@ -12,14 +12,13 @@ public class Teste {
 		// TODO Auto-generated method stub
 
 		
-		Dao<Medico> medicoDAO = new Dao<Medico>();
+		Dao<Paciente> pacienteDAO = new Dao<Paciente>();
 		//Dao<Endereco> enderecoDAO = new Dao<Endereco>();
 		
-		Medico m = new Medico();
+		Paciente p = new Paciente();
 		
-		//Endereco e = new Endereco();
+		//Endereco e = enderecoDAO.find(Endereco.class, 1);
 		//m.setNome("oi");
-		//medicoDAO.persist(m);
 		/*e.setBairro("sdfsdff");
 		e.setCep(12323);
 		e.setCidade("sdfsdf");
@@ -31,8 +30,7 @@ public class Teste {
 		//u.setEndereco(e);
 		
 		//enderecoDAO.persist(e);
-		medicoDAO.persist(m);
-		
+		pacienteDAO.persist(p);
 	}
 
 }

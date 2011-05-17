@@ -6,14 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "\"Usuario\"")
 @SequenceGenerator(name="seq", sequenceName="\"Usuario_id_seq\"")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -24,7 +27,7 @@ public class Usuario implements Serializable{
 	private String senha;
 	private String nome;
 	private int cpf;
-	@JoinColumn(name="Endereco")
+	@JoinColumn(name="id_endereco")
 	@OneToOne
 	private Endereco endereco;
 
@@ -88,5 +91,4 @@ public class Usuario implements Serializable{
 	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
-
 }
