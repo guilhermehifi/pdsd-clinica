@@ -2,6 +2,7 @@ package ifrn.pds.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,10 +17,18 @@ public class Dao<E> {
 	
 	public void persist(E entity){
 		conecta();
-		tx = session.beginTransaction();
-		session.persist(entity);
-		tx.commit();
-		fechaConexao();
+		try {
+			tx = session.beginTransaction();
+			session.persist(entity);
+			tx.commit();
+		} catch (HibernateException e) {
+			//e.printStackTrace();
+			for (String ms : e.getMessages()) {
+				System.out.println(ms);
+			};
+		}finally{
+			fechaConexao();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
