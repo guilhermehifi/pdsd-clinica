@@ -2,7 +2,6 @@ package ifrn.pds.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +20,10 @@ public class Prontuario {
 	@OneToOne
 	private Paciente paciente;
 
-	@OneToMany(mappedBy = "procedimento", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "id")
 	private List<Procedimento> procedimentos;
 	
-	@OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "id")
 	private List<Receita> receitas;
 	
 	public Prontuario() {

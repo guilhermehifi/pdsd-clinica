@@ -1,9 +1,7 @@
 package ifrn.pds.model;
 import ifrn.pds.dao.Dao;
 
-import org.hibernate.*;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
+import java.util.List;
 
 public class Teste {
 
@@ -12,10 +10,10 @@ public class Teste {
 		// TODO Auto-generated method stub
 
 		
-		Dao<Paciente> pacienteDAO = new Dao<Paciente>();
+		Dao<Endereco> enderecoDAO = new Dao<Endereco>();
 		//Dao<Endereco> enderecoDAO = new Dao<Endereco>();
 		
-		Paciente p = new Paciente();
+		//Endereco e = enderecoDAO.findById(Endereco.class, 1);
 		
 		//Endereco e = enderecoDAO.find(Endereco.class, 1);
 		//m.setNome("oi");
@@ -30,7 +28,14 @@ public class Teste {
 		//u.setEndereco(e);
 		
 		//enderecoDAO.persist(e);
-		pacienteDAO.persist(p);
+		//System.out.println(e.getId() + "-");
+		//enderecoDAO.remove(e);
+		//pacienteDAO.remove(Paciente.class, p.getId());
+		//enderecoDAO.removeById(Endereco.class, 2);
+		List<Endereco> lista = enderecoDAO.findAll(Endereco.class);
+		for (Endereco endereco : lista) {
+			System.out.println(endereco.getId());
+		}
 	}
 
 }
