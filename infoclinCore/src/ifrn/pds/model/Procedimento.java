@@ -20,10 +20,10 @@ public class Procedimento {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "procedimento")
 	private TipoProcedimento tipoProcedimento;
-	@JoinColumn(name="Medico")
+	@JoinColumn(name = "Medico")
 	@ManyToOne
 	private Medico medico;
-	@JoinColumn(name="Paciente")
+	@JoinColumn(name = "Paciente")
 	@ManyToOne
 	private Paciente paciente;
 	private String anamnese;
