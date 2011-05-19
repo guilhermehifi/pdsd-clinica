@@ -7,7 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 //TODO Tratar algumas possíveis exceções!
@@ -18,24 +19,20 @@ public class Dao<E> {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("infoclinPersistenceUnit");
 		entityManager = entityManagerFactory.createEntityManager();
 	}
-
+	
+	/*
+	 * GATO! Usando session ao inves do EntityManager. Nao esta muito elegante,  mas esta funcionando ;D
+	 */
 	public void persist(E entity) {
-		try {
-		conecta();
-		getTransaction();
-			//tx = session.beginTransaction();
-			//session.persist(entity);
-			//tx.commit();
-			entityManager.persist(entity);
-		} catch (HibernateException e) {
-			// e.printStackTrace();
-			for (String ms : e.getMessages()) {
-				System.out.println(ms);
-			}
-			;
-		} finally {
-			entityManager.flush();
-		}
+		//conecta();
+		//getTransaction();
+		Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+		 
+		Transaction tx = session.beginTransaction();
+		 session.persist(entity);
+		 tx.commit();
+		//entityManager.persist(entity);
+		session.close();
 	}
 
 	private void getTransaction() {

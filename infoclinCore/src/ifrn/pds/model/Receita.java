@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Receita")
+@Table(name = "\"Receita\"")
 @SequenceGenerator(name="seq", sequenceName="\"Endereco_id_seq\"")
 public class Receita {
 	@Id
