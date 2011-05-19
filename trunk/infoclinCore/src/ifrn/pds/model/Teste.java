@@ -23,7 +23,8 @@ public class Teste {
 		e.setComplemento("sdfds");
 		e.setEstado("sdfsdf");
 		e.setNumero(124);*/
-		
+		Endereco e = new Endereco();
+		enderecoDAO.persist(e);
 		//u.setNome("Ronaldo");
 		//u.setEndereco(e);
 		
