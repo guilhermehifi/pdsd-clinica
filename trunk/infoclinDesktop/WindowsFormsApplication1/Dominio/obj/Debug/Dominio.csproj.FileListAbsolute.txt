@@ -1,0 +1,10 @@
+E:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\obj\Debug\ResolveAssemblyReference.cache
+E:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\bin\Debug\Dominio.dll
+E:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\bin\Debug\Dominio.pdb
+E:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\obj\Debug\Dominio.dll
+E:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\obj\Debug\Dominio.pdb
+F:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\bin\Debug\Dominio.dll
+F:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\bin\Debug\Dominio.pdb
+F:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\obj\Debug\ResolveAssemblyReference.cache
+F:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\obj\Debug\Dominio.dll
+F:\TADS\4 PERIODO\PDS\projects\WindowsFormsApplication1\Dominio\obj\Debug\Dominio.pdb
