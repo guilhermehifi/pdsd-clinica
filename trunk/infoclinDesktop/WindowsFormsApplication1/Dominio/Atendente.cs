@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Atendente : Usuario
+    class Atendente //: Usuario
     {
 
     }

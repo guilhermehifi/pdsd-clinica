@@ -7,17 +7,28 @@ namespace Dominio
 {
     public class Medico : Usuario
     {
-        private List<Array> especialidades;
+        private List<string> especialidades;
         private Enum tipoProcedimentos;
-        private string Crm;
+        private int crm;
 
         public Medico(/*int id, */string login, string senha, Endereco endereco,
-            string nome, string cpf, string crm)
+            string nome, int cpf, int crm, List<string> especialidades)
             : base(/*id, */login, senha, endereco, nome, cpf)
         {
-            Crm = crm;
+            this.crm = crm;
+            this.especialidades = especialidades;
         }
 
+        public string listarEspecialidades()
+        {
+            string lista = "";
+            foreach (string espec in especialidades)
+            {
+                lista += espec;
+                lista += Environment.NewLine;
+            }
+            return lista;
+        }
 
     }
 }
