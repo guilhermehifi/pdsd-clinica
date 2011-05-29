@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio
 {
-    class Paciente : Usuario
+    class Paciente //: Usuario
     {
         int idProntuario;
         int numCartaoPlano;

@@ -8,36 +8,36 @@ namespace Dominio
     public class Usuario
     {
         //int Id; vem do web service
-        string Login ;
-        string Senha ;
-        Endereco Endereco ;
-        string Nome ;
-        string Cpf;
-
-        public Usuario()
-        {
-            
-        }
+        private string login;
+        private string senha;
+        private Endereco endereco { get; set; }
+        private string nome;
+        private int cpf;
         
         public Usuario(/*int id,*/ string login, string senha, Endereco endereco,
-            string nome, string cpf)
+            string nome, int cpf)
         {
             //Id = id;
-            Login = login;
-            Senha = senha;
-            Endereco = endereco;
-            Nome = nome;
-            Cpf = cpf;
+            this.login = login;
+            this.senha = senha;
+            this.endereco = endereco;
+            this.nome = nome;
+            this.cpf = cpf;
         }
+
+        public string Nome
+        {
+            get { return this.nome; }
+            set { this.nome = value; }
+        }
+
+        
 
         public void conectar()
         {
 
         }
 
-        public string getNome()
-        {
-            return Nome;
-        }
+        
     }
 }
