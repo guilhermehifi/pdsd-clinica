@@ -1,0 +1,41 @@
+#{extends 'main.html' /}
+#{set title:'Projeto de Sistema Distribu&iacute;do InfoClin' /}
+<div id="login-box">
+<h2>AGENDA</h2>
+<form action="@{Application.index}" id="login">
+<div style="display:block;padding:10px;margin-top:5px;vertical-align:bottom;">
+Proced.:&nbsp;<select name="procedimento" class="form-login" title="Procedimento" style="margin-top:-5px;" >
+<option value="c">Consulta</option>
+<option value="r">Retorno</option>
+<option value="e">Exame</option>
+</select>
+</div>
+<div style="display:block;padding:10px;margin-top:5px;vertical-align:bottom;">
+M&eacute;dico:&nbsp;<select name="medico" class="form-login" title="M&eacute;dico" style="margin-top:-5px;" >
+<option value="1">Ivo Pitangui</option>
+<option value="2">Conrad Murray</option>
+<option value="3">Drauzio Varella</option>
+<option value="4">Roberto Miguel Rey Jr.</option>
+</select>
+</div>
+<div style="display:block;padding-top:10px;margin-left:25px;">
+Data:<input name="data" id="data" title="Data" value="" size="10" maxlength="2048" />
+Hora:<input name="hora" id="data" type="text" title="Hora" value="" size="10" maxlength="2048" style="margin-left:30px;"/></div>
+<br />
+<button id="submit_button"></button>
+</form>
+</div>
+<script>
+	$(function() {
+		$( "#data" ).datepicker({ dateFormat: 'dd/mm/yy' });
+		
+	});
+	</script>
+<script type="text/javascript">
+<!--
+$('#submit_button').click(function() {
+	  $('#login').submit();
+	});
+//-->
+</script>
+</div>
