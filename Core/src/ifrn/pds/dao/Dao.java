@@ -1,16 +1,16 @@
 package ifrn.pds.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
+
+
 //TODO Tratar algumas possíveis exceções!
 public class Dao<E> {
 	private EntityManager entityManager;
