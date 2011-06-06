@@ -29,7 +29,7 @@ public class Prontuario {
 	private List<Receita> receitas;
 
 	public Prontuario() {
-
+		
 	}
 
 	public Prontuario(Paciente paciente, List<Procedimento> procedimentos,
@@ -37,6 +37,7 @@ public class Prontuario {
 		this.paciente = paciente;
 		this.procedimentos = procedimentos;
 		this.receitas = receitas;
+		
 	}
 
 	public Paciente getPaciente() {
