@@ -26,9 +26,9 @@ public class Medico extends Usuario {
 	@OneToMany
 	private List<Agenda> agenda;
 
-	public Medico(String senha, String login, Endereco endereco, String nome,
-			int cpf, List<Especialidade> especialidades, List<Procedimento> procedimentos) {
-		super(senha, login, endereco, nome, cpf);
+	public Medico(String senha, String usuario, Endereco endereco, String nome,
+			int cpf, int rg, String sexo, int telefone, String email, List<Especialidade> especialidades, List<Procedimento> procedimentos) {
+		super(senha, usuario, endereco, nome, cpf, rg, sexo, telefone, email);
 		this.especialidades = especialidades;
 		this.procedimentos = procedimentos;
 	}

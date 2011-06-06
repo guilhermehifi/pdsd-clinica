@@ -18,8 +18,8 @@ public class Paciente extends Usuario {
 	private String nomePlano;
 	
 	public Paciente(String senha, String login, Endereco endereco,
-			String nome, int cpf) {
-		super(senha, login, endereco, nome, cpf);
+			String nome, int cpf, int rg, String sexo, int telefone, String email) {
+		super(senha, login, endereco, nome, cpf, rg, sexo, telefone, email);
 	}
 	
 	public Paciente() {
