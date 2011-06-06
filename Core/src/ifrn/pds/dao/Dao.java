@@ -27,7 +27,6 @@ public class Dao<E> {
 		//conecta();
 		//getTransaction();
 		Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
-		 
 		Transaction tx = session.beginTransaction();
 		 session.persist(entity);
 		 tx.commit();
@@ -48,16 +47,31 @@ public class Dao<E> {
 		return lista;
 	}
 
+	//método será usuado para fazer o controle de login
 	@SuppressWarnings("unchecked")
 	public E findByExample(Class<E> classe, String nomeCampo, String valorCampo) {
 		conecta();
 		Query q = entityManager.createQuery("SELECT e FROM " + classe.getName() + " e where " + nomeCampo + " = " + valorCampo);
 		return (E) q.getSingleResult();
 	}
+	
+	//Tirar a duvida duvida sobre o hibernate
+	public E findUsuario(Class<E> classe, String usuario){
+//		conecta();
+//		Query q = entityManager.createQuery("SELECT FROM usuario WHERE usuario = ?");
+		return null;
+		
+	}
 
 	public E findById(Class<E> classe, int id) {
 		conecta();
 		E e = entityManager.find(classe, id);
+		return e;
+	}
+	
+	public E findByCPF(Class<E> classe, int cpf) {
+		conecta();
+		E e = entityManager.find(classe, cpf);
 		return e;
 	}
 
