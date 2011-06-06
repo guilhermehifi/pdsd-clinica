@@ -1,0 +1,138 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServicoAtendenteService WSDL service -->
+
+  <service name="ServicoAtendente" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://webservice.fachada.pds.ifrn"/>
+      <parameter name="wsdlServiceElement" value="ServicoAtendenteService"/>
+      <parameter name="schemaQualified" value="http://model.pds.ifrn,http://webservice.fachada.pds.ifrn,http://xml.apache.org/xml-soap"/>
+      <parameter name="wsdlServicePort" value="ServicoAtendente"/>
+      <parameter name="className" value="ifrn.pds.fachada.webservice.ServicoAtendenteSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ServicoAtendente"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="buscarPaciente" qname="operNS:buscarPaciente" xmlns:operNS="http://webservice.fachada.pds.ifrn" returnQName="retNS:buscarPacienteReturn" xmlns:retNS="http://webservice.fachada.pds.ifrn" returnType="rtns:Paciente" xmlns:rtns="http://model.pds.ifrn" soapAction="" >
+        <parameter qname="pns:cpf" xmlns:pns="http://webservice.fachada.pds.ifrn" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="cadastrarPaciente" qname="operNS:cadastrarPaciente" xmlns:operNS="http://webservice.fachada.pds.ifrn" soapAction="" >
+        <parameter qname="pns:paciente" xmlns:pns="http://webservice.fachada.pds.ifrn" type="tns:Paciente" xmlns:tns="http://model.pds.ifrn"/>
+      </operation>
+      <operation name="excluirAgendamento" qname="operNS:excluirAgendamento" xmlns:operNS="http://webservice.fachada.pds.ifrn" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://webservice.fachada.pds.ifrn" type="tns:Agenda" xmlns:tns="http://model.pds.ifrn"/>
+      </operation>
+      <parameter name="allowedMethods" value="buscarPaciente excluirAgendamento cadastrarPaciente"/>
+
+      <typeMapping
+        xmlns:ns="http://webservice.fachada.pds.ifrn"
+        qname="ns:>buscarPacienteResponse"
+        type="java:ifrn.pds.fachada.webservice.BuscarPacienteResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.fachada.pds.ifrn"
+        qname="ns:>cadastrarPacienteResponse"
+        type="java:ifrn.pds.fachada.webservice.CadastrarPacienteResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.fachada.pds.ifrn"
+        qname="ns:>buscarPaciente"
+        type="java:ifrn.pds.fachada.webservice.BuscarPaciente"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.pds.ifrn"
+        qname="ns:Procedimento"
+        type="java:ifrn.pds.model.Procedimento"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://webservice.fachada.pds.ifrn"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.pds.ifrn"
+        qname="ns:Endereco"
+        type="java:ifrn.pds.model.Endereco"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.fachada.pds.ifrn"
+        qname="ns:>cadastrarPaciente"
+        type="java:ifrn.pds.fachada.webservice.CadastrarPaciente"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.fachada.pds.ifrn"
+        qname="ns:>excluirAgendamento"
+        type="java:ifrn.pds.fachada.webservice.ExcluirAgendamento"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.pds.ifrn"
+        qname="ns:Usuario"
+        type="java:ifrn.pds.model.Usuario"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.pds.ifrn"
+        qname="ns:Medico"
+        type="java:ifrn.pds.model.Medico"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.pds.ifrn"
+        qname="ns:Agenda"
+        type="java:ifrn.pds.model.Agenda"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://webservice.fachada.pds.ifrn"
+        qname="ns:>excluirAgendamentoResponse"
+        type="java:ifrn.pds.fachada.webservice.ExcluirAgendamentoResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.pds.ifrn"
+        qname="ns:Paciente"
+        type="java:ifrn.pds.model.Paciente"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
