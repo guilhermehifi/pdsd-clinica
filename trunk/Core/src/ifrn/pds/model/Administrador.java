@@ -9,9 +9,13 @@ public class Administrador extends Usuario {
 
 	private static final long serialVersionUID = 1213L;
 
-	public Administrador(String senha, String login, Endereco endereco,
-			String nome, int cpf) {
-		super(senha, login, endereco, nome, cpf);
+	public Administrador(String senha, String usuario, Endereco endereco,
+			String nome, int cpf, int rg, String sexo, int telefone, String email)  {
+		super(senha, usuario, endereco, nome, cpf, rg, sexo, telefone, email);
+	}
+	
+	public Administrador(){
+		super();
 	}
 
 }

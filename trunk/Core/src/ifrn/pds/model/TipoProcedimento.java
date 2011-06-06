@@ -1,16 +1,26 @@
 package ifrn.pds.model;
 
-public enum TipoProcedimento {
-	CONSULTA("consulta"),
-	EXAME("exame");
+public class TipoProcedimento {
+	
 	
 	private String nome;
 	
-	private TipoProcedimento(String nome){
+	public TipoProcedimento(){
+		
+	}
+	
+	public TipoProcedimento(String nome){
 		this.nome = nome;
 	}
-
-	@Override
+	
+	public void setTipoProcedimento(String nome){
+		this.nome=nome;
+	}
+	
+	public String getTipoProcedimento(){
+		return nome;
+	}
+	
 	public String toString() {
 		return nome;
 	}
