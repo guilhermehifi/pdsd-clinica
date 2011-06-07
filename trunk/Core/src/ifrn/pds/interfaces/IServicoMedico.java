@@ -8,7 +8,7 @@ public interface IServicoMedico {
 	
 	public void cadastrarMédico(Medico medico);
 	public Medico buscarMedico();
-	public List<Medico> listarMedico();
-	public List<Especialidade> listarEspecialidadeMedico();
+	public Medico [] listarMedico();
+	public Especialidade []listarEspecialidadeMedico();
 
 }
