@@ -7,7 +7,7 @@
 
 package ifrn.pds.fachada.webservice;
 
-import java.util.List;
+
 
 import ifrn.pds.dao.Dao;
 import ifrn.pds.interfaces.IServicoMedico;
@@ -29,13 +29,13 @@ public class ServicoMedico implements IServicoMedico{
 	}
 
 	
-	public List<Especialidade> listarEspecialidadeMedico() {
+	public Especialidade [] listarEspecialidadeMedico() {
 		
 		return null;
 	}
 
 	
-	public List<Medico> listarMedico() {
+	public Medico[]listarMedico() {
 		
 		return null;
 	}
