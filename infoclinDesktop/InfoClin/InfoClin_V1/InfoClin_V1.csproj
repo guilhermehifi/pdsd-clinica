@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EFFF9BF3-93C8-4397-ADE6-60D513EC52C3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InfoClin_V1</RootNamespace>
+    <AssemblyName>InfoClin_V1</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdministradorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdministradorForm.Designer.cs">
+      <DependentUpon>AdministradorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Agendar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Agendar.Designer.cs">
+      <DependentUpon>Agendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AtendenteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AtendenteForm.Designer.cs">
+      <DependentUpon>AtendenteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarAtendente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CadastrarAtendente.Designer.cs">
+      <DependentUpon>CadastrarAtendente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CadastrarMedico.Designer.cs">
+      <DependentUpon>CadastrarMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CadastrarPaciente.Designer.cs">
+      <DependentUpon>CadastrarPaciente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdministradorForm.resx">
+      <DependentUpon>AdministradorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Agendar.resx">
+      <DependentUpon>Agendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AtendenteForm.resx">
+      <DependentUpon>AtendenteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CadastrarAtendente.resx">
+      <DependentUpon>CadastrarAtendente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CadastrarMedico.resx">
+      <DependentUpon>CadastrarMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CadastrarPaciente.resx">
+      <DependentUpon>CadastrarPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1267022339_Brazil.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
