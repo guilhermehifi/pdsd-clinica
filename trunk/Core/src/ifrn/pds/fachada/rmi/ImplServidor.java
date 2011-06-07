@@ -1,14 +1,16 @@
 package ifrn.pds.fachada.rmi;
 
 import ifrn.pds.dao.Dao;
+import ifrn.pds.interfaces.ObjetoRemotoServidor;
 import ifrn.pds.model.Agenda;
 import ifrn.pds.model.Medico;
 import ifrn.pds.model.Paciente;
 import ifrn.pds.model.Procedimento;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class ImplServidor implements ObjetoRemotoServidor{
 
@@ -41,8 +43,11 @@ public class ImplServidor implements ObjetoRemotoServidor{
 		}
 	}
 	
-	public List<Procedimento> listarProcedimento() throws RemoteException {
-			return procDAO.findAll(Procedimento.class);
+	@SuppressWarnings("unchecked")
+	public Procedimento [] listarProcedimento() throws RemoteException {
+		ArrayList<Procedimento> proc = (ArrayList<Procedimento>) procDAO.findAll(Procedimento.class);
+		Procedimento [] procedimentos = (Procedimento[]) proc.toArray();
+		return procedimentos;
 	}
 
 }
