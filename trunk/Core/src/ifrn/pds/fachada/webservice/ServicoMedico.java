@@ -8,37 +8,18 @@
 package ifrn.pds.fachada.webservice;
 
 
-
 import ifrn.pds.dao.Dao;
 import ifrn.pds.interfaces.IServicoMedico;
-import ifrn.pds.model.Endereco;
 import ifrn.pds.model.Especialidade;
 import ifrn.pds.model.Medico;
 
-public class ServicoMedico implements IServicoMedico{
-
-	Dao<Medico> daoMedico = new Dao<Medico>();
-	
-	public Medico buscarMedico() {
-	
-		return null;
-	}
-
-	public void cadastrarMédico(Medico medico) {
-		Endereco endereco = new Endereco();
-	}
+public class ServicoMedico {
+	private Dao<Medico> medicodDao = new Dao<Medico>();
 
 	
-	public Especialidade [] listarEspecialidadeMedico() {
-		
-		return null;
-	}
 
-	
-	public Medico[]listarMedico() {
-		
-		return null;
+	public Medico[] listarMedicos() {
+		return  null; //(Medico[]) medicodDao.findAll(Medico.class).toArray();
 	}
-	
 	
 }

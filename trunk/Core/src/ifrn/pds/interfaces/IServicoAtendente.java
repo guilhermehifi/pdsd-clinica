@@ -1,6 +1,5 @@
 package ifrn.pds.interfaces;
 
-import java.util.List;
 import ifrn.pds.model.Agenda;
 import ifrn.pds.model.Convenio;
 import ifrn.pds.model.Medico;
@@ -13,12 +12,8 @@ public interface IServicoAtendente {
 	public Paciente buscarPaciente(int id);
 	public Medico [] listarEspecialista();
 	public Agenda[] listarAgendamento();
-	public Convenio [] listarConvenio();
+	public Convenio[] listarConvenio();
 	public boolean isUsuario(String usuario);
 	public void excluirAgendamento(Agenda id);
-	
-	
-	
-	
 
 }

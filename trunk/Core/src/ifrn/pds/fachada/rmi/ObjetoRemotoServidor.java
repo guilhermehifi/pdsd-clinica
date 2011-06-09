@@ -3,15 +3,15 @@ package ifrn.pds.fachada.rmi;
 import ifrn.pds.model.Medico;
 import ifrn.pds.model.Paciente;
 import ifrn.pds.model.Procedimento;
-import ifrn.pds.model.TipoProcedimento;
+
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
-public interface ObjetoRemotoServidor extends Remote{
+public interface ObjetoRemotoServidor extends Remote, Serializable{
 	
 	public Paciente fazerLogin(String usuario, String senha) throws RemoteException;
 	public void agendar(Procedimento procedimento, Calendar horario, Medico medico,

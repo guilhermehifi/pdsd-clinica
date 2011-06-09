@@ -1,14 +1,13 @@
 package ifrn.pds.interfaces;
 
-import java.util.List;
-
-import ifrn.pds.model.*;
+import ifrn.pds.model.Especialidade;
+import ifrn.pds.model.Medico;
 
 public interface IServicoMedico {
 	
-	public void cadastrarMédico(Medico medico);
-	public Medico buscarMedico();
-	public Medico [] listarMedico();
-	public Especialidade []listarEspecialidadeMedico();
+	public void cadastrarMedico(Medico medico);
+	public Medico buscarMedico(String login);
+	public Medico[] listarMedicos();
+	public Especialidade[] listarEspecialidadeMedico(Medico medico);
 
 }
