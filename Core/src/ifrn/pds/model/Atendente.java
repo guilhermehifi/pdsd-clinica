@@ -13,5 +13,8 @@ public class Atendente extends Usuario {
 			String nome, int cpf, int rg, String sexo, int telefone, String email)  {
 		super(senha, usuario, endereco, nome, cpf, rg, sexo, telefone, email);
 	}
+	
+	public Atendente() {
+	}
 
 }

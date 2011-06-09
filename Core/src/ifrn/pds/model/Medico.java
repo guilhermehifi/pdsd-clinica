@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import tads.ed.sequencia.NodeSequence;
+
 @Entity
 @Table(name = "Medico")
 public class Medico extends Usuario {
@@ -16,51 +18,51 @@ public class Medico extends Usuario {
 	
 	@JoinColumn(name = "Especialidade")
 	@OneToMany
-	private List<Especialidade> especialidades;
+	private NodeSequence<Especialidade> especialidades;
 
 	@JoinColumn(name = "Procedimento")
 	@OneToMany
-	private List<Procedimento> procedimentos;
+	private NodeSequence<Procedimento> procedimentos;
 	
 	@JoinColumn(name="Agenda")
 	@OneToMany
-	private List<Agenda> agenda;
+	private NodeSequence<Agenda> agenda;
 
 	public Medico(String senha, String usuario, Endereco endereco, String nome,
-			int cpf, int rg, String sexo, int telefone, String email, List<Especialidade> especialidades, List<Procedimento> procedimentos) {
+			int cpf, int rg, String sexo, int telefone, String email) {
 		super(senha, usuario, endereco, nome, cpf, rg, sexo, telefone, email);
-		this.especialidades = especialidades;
-		this.procedimentos = procedimentos;
+		this.especialidades = new NodeSequence<Especialidade>();
+		this.procedimentos = new NodeSequence<Procedimento>();
 	}
 	
 	public Medico() {
-		procedimentos = new ArrayList<Procedimento>();
-		agenda = new ArrayList<Agenda>();
-		especialidades = new ArrayList<Especialidade>();
+		procedimentos = new NodeSequence<Procedimento>();
+		agenda = new NodeSequence<Agenda>();
+		especialidades = new NodeSequence<Especialidade>();
 	}
 
 
-	public List<Procedimento> getProcedimentos() {
+	public NodeSequence<Procedimento> getProcedimentos() {
 		return procedimentos;
 	}
 
-	public void setProcedimentos(List<Procedimento> procedimentos) {
+	public void setProcedimentos(NodeSequence<Procedimento> procedimentos) {
 		this.procedimentos = procedimentos;
 	}
 
-	public List<Agenda> getAgenda() {
+	public NodeSequence<Agenda> getAgenda() {
 		return agenda;
 	}
 
-	public void setAgenda(List<Agenda> agenda) {
+	public void setAgenda(NodeSequence<Agenda> agenda) {
 		this.agenda = agenda;
 	}
 
-	public List<Especialidade> getEspecialidades() {
+	public NodeSequence<Especialidade> getEspecialidades() {
 		return especialidades;
 	}
 
-	public void setEspecialidades(List<Especialidade> especialidades) {
+	public void setEspecialidades(NodeSequence<Especialidade> especialidades) {
 		this.especialidades = especialidades;
 	}
 	

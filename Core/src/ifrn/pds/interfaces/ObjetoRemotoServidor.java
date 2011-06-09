@@ -3,12 +3,10 @@ package ifrn.pds.interfaces;
 import ifrn.pds.model.Medico;
 import ifrn.pds.model.Paciente;
 import ifrn.pds.model.Procedimento;
-import ifrn.pds.model.TipoProcedimento;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 
 public interface ObjetoRemotoServidor extends Remote{
