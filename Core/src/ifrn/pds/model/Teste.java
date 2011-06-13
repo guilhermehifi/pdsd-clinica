@@ -39,10 +39,14 @@ public class Teste {
 			System.out.println(endereco.getId());
 		}
 		*/
-		Dao <Paciente> usuarioDAO = new Dao<Paciente>();
+		Dao <Paciente> pacienteDAO = new Dao<Paciente>();
+		Paciente p = new Paciente();
 		Endereco e = new Endereco();
+		p.setEndereco(e);
 		e.setRua("RUA");
-		//enderecoDAO.persist(e);
+		
+		enderecoDAO.persist(e);
+		pacienteDAO.persist(p);
 
 		List<Endereco> lista = enderecoDAO.findAll(Endereco.class);
 		System.out.println(lista.size());
