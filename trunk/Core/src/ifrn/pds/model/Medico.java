@@ -8,6 +8,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.IndexColumn;
+
+import com.sun.accessibility.internal.resources.accessibility;
+
+import sun.management.resources.agent;
 import tads.ed.sequencia.NodeSequence;
 
 @Entity
@@ -17,53 +22,109 @@ public class Medico extends Usuario {
 	private static final long serialVersionUID = 13L;
 	
 	@JoinColumn(name = "Especialidade")
-	@OneToMany
-	private NodeSequence<Especialidade> especialidades;
+	@OneToMany@IndexColumn(name = "especialidade")
+	private Especialidade[] especialidades;
 
 	@JoinColumn(name = "Procedimento")
-	@OneToMany
-	private NodeSequence<Procedimento> procedimentos;
+	@OneToMany@IndexColumn(name = "procedimentos")
+	private Procedimento[] procedimentos;
 	
 	@JoinColumn(name="Agenda")
-	@OneToMany
-	private NodeSequence<Agenda> agenda;
-
-	public Medico(String senha, String usuario, Endereco endereco, String nome,
-			int cpf, int rg, String sexo, int telefone, String email) {
-		super(senha, usuario, endereco, nome, cpf, rg, sexo, telefone, email);
-		this.especialidades = new NodeSequence<Especialidade>();
-		this.procedimentos = new NodeSequence<Procedimento>();
-	}
+	@OneToMany @IndexColumn(name = "agenda")
+	private Agenda[] agenda;
 	
+	private int quantidadeProcedimento;
+	
+	private int quantidadeAgenda;
+	
+	private int quantidadeEspecialidade;
+	
+	
+//	@JoinColumn(name = "Especialidade")
+//	@OneToMany
+//	private List<Especialidade> especialidades;
+//	
+//	@JoinColumn(name = "Procedimento")
+//	@OneToMany
+//	private List<Procedimento> procedimentos;
+//	
+//	@JoinColumn(name="Agenda")
+//	@OneToMany
+//	private List<Agenda> agenda;
+
 	public Medico() {
-		procedimentos = new NodeSequence<Procedimento>();
-		agenda = new NodeSequence<Agenda>();
-		especialidades = new NodeSequence<Especialidade>();
+		//procedimentos = new ArrayList<Procedimento>();
+		//agenda = new ArrayList<Agenda>();
+		//especialidades = new ArrayList<Especialidade>();
+		/*quantidadeAgenda = 2;
+		quantidadeProcedimento = 2;
+		quantidadeEspecialidade = 2;
+		procedimentos = new Procedimento[quantidadeProcedimento];
+		agenda = new Agenda[quantidadeAgenda];
+		especialidades = new Especialidade[quantidadeEspecialidade];*/
 	}
 
 
-	public NodeSequence<Procedimento> getProcedimentos() {
+	public Procedimento[] getProcedimentos() {
 		return procedimentos;
 	}
 
-	public void setProcedimentos(NodeSequence<Procedimento> procedimentos) {
+	public void setProcedimentos(Procedimento[] procedimentos) {
 		this.procedimentos = procedimentos;
 	}
 
-	public NodeSequence<Agenda> getAgenda() {
+	public Agenda[] getAgenda() {
 		return agenda;
 	}
 
-	public void setAgenda(NodeSequence<Agenda> agenda) {
+	public void setAgenda(Agenda[] agenda) {
 		this.agenda = agenda;
 	}
 
-	public NodeSequence<Especialidade> getEspecialidades() {
+	public Especialidade[] getEspecialidades() {
 		return especialidades;
 	}
 
-	public void setEspecialidades(NodeSequence<Especialidade> especialidades) {
+	public void setEspecialidades(Especialidade[] especialidades) {
 		this.especialidades = especialidades;
+	}
+//	public List<Procedimento> getProcedimentos() {
+//		return procedimentos;
+//	}
+//	
+//	public void setProcedimentos(List<Procedimento> procedimentos) {
+//		this.procedimentos = procedimentos;
+//	}
+//	
+//	public List<Agenda> getAgenda() {
+//		return agenda;
+//	}
+//	
+//	public void setAgenda(List<Agenda> agenda) {
+//		this.agenda = agenda;
+//	}
+//	
+//	public List<Especialidade> getEspecialidades() {
+//		return especialidades;
+//	}
+//	
+//	public void setEspecialidades(List<Especialidade> especialidades) {
+//		this.especialidades = especialidades;
+//	}
+
+
+	public int getQuantidadeProcedimento() {
+		return quantidadeProcedimento;
+	}
+
+
+	public int getQuantidadeAgenda() {
+		return quantidadeAgenda;
+	}
+
+
+	public int getQuantidadeEspecialidade() {
+		return quantidadeEspecialidade;
 	}
 	
 }

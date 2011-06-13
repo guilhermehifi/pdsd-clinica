@@ -1,7 +1,5 @@
 package ifrn.pds.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +8,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
 
 @Entity
 @Table(name = "Prontuario")
@@ -22,21 +22,13 @@ public class Prontuario {
 	@OneToOne
 	private Paciente paciente;
 
-	@OneToMany(mappedBy = "id")
-	private List<Procedimento> procedimentos;
+	@OneToMany(mappedBy = "id") @IndexColumn(name = "procedimentos")
+	private Procedimento[] procedimentos;
 
-	@OneToMany(mappedBy = "id")
-	private List<Receita> receitas;
+	@OneToMany(mappedBy = "id") @IndexColumn(name = "receitas")
+	private Receita[] receitas;
 
 	public Prontuario() {
-		
-	}
-
-	public Prontuario(Paciente paciente, List<Procedimento> procedimentos,
-			List<Receita> receitas) {
-		this.paciente = paciente;
-		this.procedimentos = procedimentos;
-		this.receitas = receitas;
 		
 	}
 
@@ -48,19 +40,19 @@ public class Prontuario {
 		this.paciente = paciente;
 	}
 
-	public List<Procedimento> getProcedimentos() {
+	public Procedimento[] getProcedimentos() {
 		return procedimentos;
 	}
 
-	public void setProcedimentos(List<Procedimento> procedimentos) {
+	public void setProcedimentos(Procedimento[] procedimentos) {
 		this.procedimentos = procedimentos;
 	}
 
-	public List<Receita> getReceitas() {
+	public Receita[] getReceitas() {
 		return receitas;
 	}
 
-	public void setReceitas(List<Receita> receitas) {
+	public void setReceitas(Receita[] receitas) {
 		this.receitas = receitas;
 	}
 
