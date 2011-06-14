@@ -28,6 +28,8 @@ public class Agenda {
 
 	@ManyToOne
 	private Paciente paciente;
+	
+	private boolean agendado;
 
 	public Agenda() {
 
@@ -75,6 +77,14 @@ public class Agenda {
 
 	public int getId() {
 		return id;
+	}
+
+	public boolean isAgendado() {
+		return agendado;
+	}
+
+	public void setAgendado(boolean agendado) {
+		this.agendado = agendado;
 	}
 
 }

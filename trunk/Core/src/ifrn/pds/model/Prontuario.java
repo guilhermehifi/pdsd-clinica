@@ -22,10 +22,12 @@ public class Prontuario {
 	@OneToOne
 	private Paciente paciente;
 
-	@OneToMany(mappedBy = "id") @IndexColumn(name = "procedimentos")
+	//@OneToMany(mappedBy = "id")
+	@IndexColumn(name = "id")
 	private Procedimento[] procedimentos;
 
-	@OneToMany(mappedBy = "id") @IndexColumn(name = "receitas")
+	//@OneToMany(mappedBy = "id") 
+	@IndexColumn(name = "id")
 	private Receita[] receitas;
 
 	public Prontuario() {

@@ -1,19 +1,13 @@
 package ifrn.pds.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
-
-import com.sun.accessibility.internal.resources.accessibility;
-
-import sun.management.resources.agent;
-import tads.ed.sequencia.NodeSequence;
 
 @Entity
 @Table(name = "Medico")
@@ -21,24 +15,20 @@ public class Medico extends Usuario {
 
 	private static final long serialVersionUID = 13L;
 	
-	@JoinColumn(name = "Especialidade")
-	@OneToMany@IndexColumn(name = "especialidade")
+	//@JoinColumn(name = "Especialidade")
+	//@OneToMany
+	@IndexColumn(name = "id")
 	private Especialidade[] especialidades;
 
-	@JoinColumn(name = "Procedimento")
-	@OneToMany@IndexColumn(name = "procedimentos")
+	//@JoinColumn(name = "Procedimento")
+	//@OneToMany
+	@IndexColumn(name = "id")
 	private Procedimento[] procedimentos;
 	
-	@JoinColumn(name="Agenda")
-	@OneToMany @IndexColumn(name = "agenda")
+	//@JoinColumn(name="Agenda")
+	//@OneToMany
+	@IndexColumn(name = "id")
 	private Agenda[] agenda;
-	
-	private int quantidadeProcedimento;
-	
-	private int quantidadeAgenda;
-	
-	private int quantidadeEspecialidade;
-	
 	
 //	@JoinColumn(name = "Especialidade")
 //	@OneToMany
@@ -59,9 +49,10 @@ public class Medico extends Usuario {
 		/*quantidadeAgenda = 2;
 		quantidadeProcedimento = 2;
 		quantidadeEspecialidade = 2;
-		procedimentos = new Procedimento[quantidadeProcedimento];
-		agenda = new Agenda[quantidadeAgenda];
-		especialidades = new Especialidade[quantidadeEspecialidade];*/
+		 */
+//		procedimentos = new Procedimento[10];
+//		agenda = new Agenda[10];
+//		especialidades = new Especialidade[10];
 	}
 
 
@@ -112,19 +103,4 @@ public class Medico extends Usuario {
 //		this.especialidades = especialidades;
 //	}
 
-
-	public int getQuantidadeProcedimento() {
-		return quantidadeProcedimento;
-	}
-
-
-	public int getQuantidadeAgenda() {
-		return quantidadeAgenda;
-	}
-
-
-	public int getQuantidadeEspecialidade() {
-		return quantidadeEspecialidade;
-	}
-	
 }
