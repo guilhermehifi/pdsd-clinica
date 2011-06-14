@@ -1,14 +1,12 @@
 package ifrn.pds.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,8 +17,8 @@ public class Procedimento {
 	@Id
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
-	@Enumerated(EnumType.STRING)
-	@Column(name = "procedimento")
+	@JoinColumn(name = "procedimento")
+	@OneToOne
 	private TipoProcedimento tipoProcedimento;
 	@JoinColumn(name = "Medico")
 	@ManyToOne

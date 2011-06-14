@@ -39,19 +39,19 @@ public class Dao<E> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<E> findAll(Class<E> classe) {
+	public List<E> findAll(String classe) {
 		List<E> lista;
 		conecta();
-		Query q = entityManager.createQuery("select e from " + classe.getName() + " e");
+		Query q = entityManager.createQuery("select e from " + classe + " e");
 		lista = q.getResultList();
 		return lista;
 	}
 
 	//método será usuado para fazer o controle de login
 	@SuppressWarnings("unchecked")
-	public E findByExample(Class<E> classe, String nomeCampo, String valorCampo) {
+	public E findByExample(String classe, String nomeCampo, String valorCampo) {
 		conecta();
-		Query q = entityManager.createQuery("SELECT e FROM " + classe.getName() + " e where " + nomeCampo + " = " + valorCampo);
+		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " = " + valorCampo);
 		return (E) q.getSingleResult();
 	}
 	

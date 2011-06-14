@@ -1,5 +1,7 @@
 package ifrn.pds.fachada.webservice;
 
+import java.util.List;
+
 import ifrn.pds.dao.Dao;
 import ifrn.pds.interfaces.IServicoAtendente;
 import ifrn.pds.model.Agenda;
@@ -17,7 +19,7 @@ public class ServicoAtendente implements IServicoAtendente {
 	private Dao<Usuario> usuarioDao = new Dao<Usuario>();
 
 	public Paciente buscarPaciente(int cpf) {
-		return pacienteDAO.findByExample(Paciente.class, "cpf", new Integer(cpf).toString());
+		return pacienteDAO.findByExample("Paciente", "cpf", new Integer(cpf).toString());
 	}
 
 	public void cadastrarPaciente(Paciente paciente) {
@@ -30,32 +32,42 @@ public class ServicoAtendente implements IServicoAtendente {
 	}
 
 	public Medico[] listarMedico() {
-		return (Medico[]) medicoDAO.findAll(Medico.class).toArray();
+		return (Medico[]) medicoDAO.findAll("Medico").toArray();
 	}
 
 	@Override
-	public void confirmarAgendamento(Agenda agenda) {
-		agendaDAO.persist(agenda);
+	public boolean confirmarAgendamento(Agenda agenda) {
+		if(!agenda.isAgendado()){
+			agenda.setAgendado(true);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public Medico[] listarEspecialista() {
-		return (Medico[]) medicoDAO.findAll(Medico.class).toArray();
+		List<Medico> lista = medicoDAO.findAll("Medico");
+		Medico[] m = new Medico[lista.size()];
+		for (int i = 0; i < m.length; i++) {
+			m[i] = lista.get(i);
+			System.out.println(m[i].getId());
+		}
+		return m;
 	}
 
 	@Override
 	public Agenda[] listarAgendamento() {
-		return (Agenda[]) agendaDAO.findAll(Agenda.class).toArray();
+		return (Agenda[]) agendaDAO.findAll("Agenda").toArray();
 	}
 
 	@Override
 	public Convenio[] listarConvenio() {
-		return (Convenio[]) convenioDao.findAll(Convenio.class).toArray();
+		return (Convenio[]) convenioDao.findAll("Convenio").toArray();
 	}
 
 	@Override
 	public boolean isUsuario(String usuario) {
-		Usuario u = usuarioDao.findByExample(Usuario.class, "usuario", usuario);
+		Usuario u = usuarioDao.findByExample("Usuario", "usuario", usuario);
 		return u != null;
 	}
 

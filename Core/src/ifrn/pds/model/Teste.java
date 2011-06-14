@@ -1,6 +1,8 @@
 package ifrn.pds.model;
 import ifrn.pds.dao.Dao;
+import ifrn.pds.fachada.webservice.ServicoAtendente;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Teste {
@@ -38,7 +40,9 @@ public class Teste {
 		for (Endereco endereco : lista) {
 			System.out.println(endereco.getId());
 		}
+		
 		*/
+		/*
 		Dao <Paciente> pacienteDAO = new Dao<Paciente>();
 		Paciente p = new Paciente();
 		Endereco e = new Endereco();
@@ -47,13 +51,32 @@ public class Teste {
 		
 		enderecoDAO.persist(e);
 		pacienteDAO.persist(p);
+		
+		Dao<Agenda> agendaDao = new Dao<Agenda>();
+		Agenda a = new Agenda();
+		a.setHorario(new GregorianCalendar());
+		a.setAgendado(true);
+		agendaDao.persist(a);*/
+		
+		Dao<Medico> medicoDAO = new Dao<Medico>();
+		
+		/*Medico m = new Medico();
+		m.setNome("Jojó");
+		dao.persist(m);*/
 
-		List<Endereco> lista = enderecoDAO.findAll(Endereco.class);
+		ServicoAtendente s = new ServicoAtendente();
+		
+		for (Medico m : s.listarEspecialista()){
+			System.out.println(m.getId());
+		}
+		
+		/*
+		List<Endereco> lista = enderecoDAO.findAll("Endereco");
 		System.out.println(lista.size());
 		for(Endereco u : lista){
 			System.out.println(u.getRua());
 
-		}
+		}*/
 
 	}
 

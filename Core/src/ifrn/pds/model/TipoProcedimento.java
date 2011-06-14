@@ -1,29 +1,40 @@
 package ifrn.pds.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TipoProcedimento")
+@SequenceGenerator(name = "seq", sequenceName = "TipoProcedimento_id_seq")
 public class TipoProcedimento {
-	
-	
+
+	@Id
+	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
+	private int id;
+
 	private String nome;
-	
-	public TipoProcedimento(){
-		
+
+	public TipoProcedimento() {
+
 	}
-	
-	public TipoProcedimento(String nome){
+
+	public TipoProcedimento(String nome) {
 		this.nome = nome;
 	}
-	
-	public void setTipoProcedimento(String nome){
-		this.nome=nome;
-	}
-	
-	public String getTipoProcedimento(){
+
+	public String getNome() {
 		return nome;
 	}
-	
-	public String toString() {
-		return nome;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}
 }

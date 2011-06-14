@@ -8,7 +8,7 @@ import ifrn.pds.model.Paciente;
 public interface IServicoAtendente {
 	
 	public void cadastrarPaciente(Paciente paciente);
-	public void confirmarAgendamento(Agenda agenda);
+	public boolean confirmarAgendamento(Agenda agenda);
 	public Paciente buscarPaciente(int id);
 	public Medico [] listarEspecialista();
 	public Agenda[] listarAgendamento();
