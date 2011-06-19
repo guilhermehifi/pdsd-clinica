@@ -1,5 +1,7 @@
 package ifrn.pds.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,13 +14,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Receita")
 @SequenceGenerator(name="seq", sequenceName="Receita_id_seq")
-public class Receita {
+public class Receita implements Serializable {
 	@Id
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
 	private String receituario;
 	@OneToOne
-	@JoinColumn(name = "procedimento")
+	@JoinColumn(name = "procedimento_id")
 	private Procedimento procedimento;
 	@OneToOne
 	private Prontuario prontuario;

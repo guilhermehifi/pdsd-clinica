@@ -1,45 +1,37 @@
 package ifrn.pds.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="Paciente")
+@Table(name = "Paciente")
 public class Paciente extends Usuario {
 
 	private static final long serialVersionUID = 134L;
-	
-	@Column(name="numero_cartao_plano")
-	private int numeroCartao;
-	
-	@Column(name="nome_plano")
-	private String nomePlano;
-	
-	public Paciente(String senha, String login, Endereco endereco,
-			String nome, int cpf, int rg, String sexo, int telefone, String email) {
-		super(senha, login, endereco, nome, cpf, rg, sexo, telefone, email);
-	}
-	
+
+	@JoinColumn(name = "convenio_id")
+	@OneToOne
+	private Convenio convenio;
+
 	public Paciente() {
-		
+
 	}
 
-	public int getNumeroCartao() {
-		return numeroCartao;
+	public Paciente(String senha, String usuario, Endereco endereco,
+			String nome, int cpf, int rg, String sexo, int telefone,
+			String email, Convenio convenio) {
+		super(senha, usuario, endereco, nome, cpf, rg, sexo, telefone, email);
+		this.convenio = convenio;
 	}
 
-	public void setNumeroCartao(int numeroCartao) {
-		this.numeroCartao = numeroCartao;
+	public Convenio getConvenio() {
+		return convenio;
 	}
 
-	public String getNomePlano() {
-		return nomePlano;
-	}
-
-	public void setNomePlano(String nomePlano) {
-		this.nomePlano = nomePlano;
+	public void setConvenio(Convenio convenio) {
+		this.convenio = convenio;
 	}
 
 }

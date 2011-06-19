@@ -17,9 +17,9 @@ import javax.persistence.Table;
 @Table(name = "Usuario")
 @SequenceGenerator(name="seq", sequenceName="Usuario_id_seq")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario implements Serializable{
+public class Usuario /*implements Serializable*/{
 
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(generator="seq", strategy = GenerationType.AUTO)
 	private int id;
@@ -131,5 +131,10 @@ public class Usuario implements Serializable{
 
 	public String getEmail() {
 		return email;
+	}
+	
+	@Override
+	public String toString() {
+		return getNome();
 	}
 }
