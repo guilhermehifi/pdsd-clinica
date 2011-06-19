@@ -24,13 +24,21 @@ public class Dao<E> {
 	 * GATO! Usando session ao inves do EntityManager. Nao esta muito elegante,  mas esta funcionando ;D
 	 */
 	public void persist(E entity) {
-		//conecta();
+		conecta();
 		//getTransaction();
 		Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		 session.persist(entity);
 		 tx.commit();
 		//entityManager.persist(entity);
+		session.close();
+	}
+	
+	public void update(E entity){
+		Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		session.merge(entity);
+		tx.commit();
 		session.close();
 	}
 
@@ -44,6 +52,7 @@ public class Dao<E> {
 		conecta();
 		Query q = entityManager.createQuery("select e from " + classe + " e");
 		lista = q.getResultList();
+		entityManager.close();
 		return lista;
 	}
 
@@ -52,26 +61,24 @@ public class Dao<E> {
 	public E findByExample(String classe, String nomeCampo, String valorCampo) {
 		conecta();
 		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " = " + valorCampo);
-		return (E) q.getSingleResult();
+		E e = (E) q.getSingleResult();
+		entityManager.close();
+		return e; 
 	}
 	
-	//Tirar a duvida duvida sobre o hibernate
-	public E findUsuario(Class<E> classe, String usuario){
-//		conecta();
-//		Query q = entityManager.createQuery("SELECT FROM usuario WHERE usuario = ?");
-		return null;
-		
+	@SuppressWarnings("unchecked")
+	public List<E> findByExampleLista(String classe, String nomeCampo, String valorCampo) {
+		conecta();
+		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " = " + valorCampo);
+		List<E> lista = q.getResultList();
+		entityManager.close();
+		return lista;
 	}
-
+	
 	public E findById(Class<E> classe, int id) {
 		conecta();
 		E e = entityManager.find(classe, id);
-		return e;
-	}
-	
-	public E findByCPF(Class<E> classe, int cpf) {
-		conecta();
-		E e = entityManager.find(classe, cpf);
+		entityManager.close();
 		return e;
 	}
 
@@ -80,6 +87,7 @@ public class Dao<E> {
 		getTransaction();
 		entityManager.remove(entity);
 		commit();
+		entityManager.close();
 	}
 	
 	public boolean removeById(Class<E> classe, int id) {
@@ -89,6 +97,7 @@ public class Dao<E> {
 				+ " e where e.id = " + id);
 		int i = q.executeUpdate();
 		commit();
+		entityManager.close();
 		return i == 1;
 	}
 

@@ -1,5 +1,7 @@
 package ifrn.pds.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Convenio")
 @SequenceGenerator(name = "seq", sequenceName = "Convenio_id_seq")
-public class Convenio {
+public class Convenio implements Serializable{
 	@Id
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;

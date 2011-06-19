@@ -1,6 +1,7 @@
 package ifrn.pds.model;
 
-import java.util.Calendar;
+import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,19 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Agenda")
 @SequenceGenerator(name = "seq", sequenceName = "Agenda_id_seq")
-public class Agenda {
+public class Agenda implements Serializable {
 	@Id
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
-
 	@ManyToOne
 	private Procedimento procedimento;
 
-	private Calendar horario;
+	@Temporal(TemporalType.DATE)
+	private Date data;
+	
+	private String horario;
 
 	@ManyToOne
 	private Medico medico;
@@ -35,12 +40,14 @@ public class Agenda {
 
 	}
 
-	public Agenda(Procedimento procedimento, Calendar horario, Medico medico,
-			Paciente paciente) {
+	public Agenda(Procedimento procedimento, Date data, String horario,
+			Medico medico, Paciente paciente, boolean agendado) {
 		this.procedimento = procedimento;
+		this.data = data;
 		this.horario = horario;
 		this.medico = medico;
 		this.paciente = paciente;
+		this.agendado = agendado;
 	}
 
 	public Procedimento getProcedimento() {
@@ -49,14 +56,6 @@ public class Agenda {
 
 	public void setProcedimento(Procedimento procedimento) {
 		this.procedimento = procedimento;
-	}
-
-	public Calendar getHorario() {
-		return horario;
-	}
-
-	public void setHorario(Calendar horario) {
-		this.horario = horario;
 	}
 
 	public Medico getMedico() {
@@ -87,4 +86,20 @@ public class Agenda {
 		this.agendado = agendado;
 	}
 
+	public java.sql.Date getData() {
+		return new java.sql.Date(data.getTime());
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+	
 }

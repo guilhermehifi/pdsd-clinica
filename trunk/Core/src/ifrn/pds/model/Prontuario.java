@@ -1,5 +1,7 @@
 package ifrn.pds.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +16,7 @@ import org.hibernate.annotations.IndexColumn;
 @Entity
 @Table(name = "Prontuario")
 @SequenceGenerator(name = "seq", sequenceName = "Prontuario_id_seq")
-public class Prontuario {
+public class Prontuario implements Serializable {
 	@Id
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
@@ -22,13 +24,13 @@ public class Prontuario {
 	@OneToOne
 	private Paciente paciente;
 
-	//@OneToMany(mappedBy = "id")
-	@IndexColumn(name = "id")
-	private Procedimento[] procedimentos;
-
-	//@OneToMany(mappedBy = "id") 
-	@IndexColumn(name = "id")
-	private Receita[] receitas;
+//	//@OneToMany(mappedBy = "id")
+//	@IndexColumn(name = "id")
+//	private Procedimento[] procedimentos;
+//
+//	//@OneToMany(mappedBy = "id") 
+//	@IndexColumn(name = "id")
+//	private Receita[] receitas;
 
 	public Prontuario() {
 		
@@ -42,21 +44,21 @@ public class Prontuario {
 		this.paciente = paciente;
 	}
 
-	public Procedimento[] getProcedimentos() {
-		return procedimentos;
-	}
-
-	public void setProcedimentos(Procedimento[] procedimentos) {
-		this.procedimentos = procedimentos;
-	}
-
-	public Receita[] getReceitas() {
-		return receitas;
-	}
-
-	public void setReceitas(Receita[] receitas) {
-		this.receitas = receitas;
-	}
+//	public Procedimento[] getProcedimentos() {
+//		return procedimentos;
+//	}
+//
+//	public void setProcedimentos(Procedimento[] procedimentos) {
+//		this.procedimentos = procedimentos;
+//	}
+//
+//	public Receita[] getReceitas() {
+//		return receitas;
+//	}
+//
+//	public void setReceitas(Receita[] receitas) {
+//		this.receitas = receitas;
+//	}
 
 	public int getId() {
 		return id;
