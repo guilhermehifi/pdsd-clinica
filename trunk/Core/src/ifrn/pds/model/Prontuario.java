@@ -2,10 +2,12 @@ package ifrn.pds.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -21,7 +23,9 @@ public class Prontuario implements Serializable {
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
 
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
 //	//@OneToMany(mappedBy = "id")

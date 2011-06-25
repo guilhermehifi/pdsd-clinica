@@ -2,6 +2,7 @@ package ifrn.pds.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Especialidade implements Serializable {
 
 	private String especialidade;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Medico medico;
 
 	public Especialidade(String especialidade) {

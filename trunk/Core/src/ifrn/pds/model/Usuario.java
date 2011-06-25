@@ -2,6 +2,7 @@ package ifrn.pds.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "Usuario")
 @SequenceGenerator(name="seq", sequenceName="Usuario_id_seq")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario /*implements Serializable*/{
+public class Usuario implements Serializable{
 
 	//private static final long serialVersionUID = 1L;
 	@Id
@@ -33,7 +34,7 @@ public class Usuario /*implements Serializable*/{
 	private String email;
 	
 	@JoinColumn(name="id_endereco")
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 
 	public Usuario() {

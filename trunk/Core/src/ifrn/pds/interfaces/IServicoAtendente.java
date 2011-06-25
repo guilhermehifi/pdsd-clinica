@@ -8,12 +8,12 @@ import ifrn.pds.model.Paciente;
 public interface IServicoAtendente {
 	
 	public void cadastrarPaciente(Paciente paciente);
-	public boolean confirmarAgendamento(Agenda agenda);
+	public boolean confirmarAgendamento(int id);
 	public Paciente buscarPaciente(int id);
 	public Medico [] listarEspecialista();
-	public Agenda[] listarAgendamento();
 	public Convenio[] listarConvenio();
-	public boolean isUsuario(String usuario);
-	public void excluirAgendamento(Agenda id);
+	public boolean verificaDisponibilidade(String usuario);
+	public void excluirAgendamento(int id);
+	Agenda[] listarAgendamento(int id, String data);
 
 }
