@@ -10,15 +10,16 @@ public class MainServidor {
 	public static void main(String[] args) throws MalformedURLException {
 
 		try{
+
 			ImplServidor server = new ImplServidor();
 			Registry reg = LocateRegistry.createRegistry(1099);
 			reg.rebind("servidor", server);
 			System.out.println("Servidor rodando!!!!!");
 		}
-		catch (RemoteException re) {
+			catch (RemoteException re) {
 			System.out.println("Exception in ServidorImpl.main: " + re);
-		}
-
-}
+	}
+		
+ }
 
 }
