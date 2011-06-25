@@ -1,5 +1,7 @@
 package ifrn.pds.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Paciente")
 @SequenceGenerator(name = "seq", sequenceName = "Usuario_id_seq")
-public class Paciente {
+public class Paciente implements Serializable{
 
 	private static final long serialVersionUID = 134L;
 
@@ -25,7 +27,7 @@ public class Paciente {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Convenio convenio;
 
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id_usuario")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 
