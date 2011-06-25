@@ -1,85 +1,124 @@
 package ifrn.pds.model;
 
 import ifrn.pds.dao.Dao;
-import ifrn.pds.interfaces.IServicoAdministrador;
 
-public class ServicoAdministrador implements IServicoAdministrador {
-	private Dao<Administrador> administradorDao = new Dao<Administrador>();
-	private Dao<Atendente> atendenteDao = new Dao<Atendente>();
-	private Dao<Medico> medicodaDao = new Dao<Medico>();
-	private Dao<Paciente> pacienteDao = new Dao<Paciente>();
-	private Dao<Procedimento> procedimentoDao = new Dao<Procedimento>();
-	private Dao<Especialidade> especialidadeDao = new Dao<Especialidade>();
-	private Dao<Convenio> convenioDao = new Dao<Convenio>();
 
-	@Override
+public class ServicoAdministrador  {
+	
+	private Dao<Administrador> administradorDao;
+	private Dao<Atendente> atendenteDao;
+	private Dao<Medico> medicoDao;
+	private Dao<Paciente> pacienteDao;
+	private Dao<Procedimento> procedimentoDao;
+	private Dao<Especialidade> especialidadeDao;
+	private Dao<Convenio> convenioDao;
+	private Dao<Usuario> usuarioDao;
+
+	public boolean isDisponivel(String usuario){
+		usuarioDao = new Dao<Usuario>();
+		Usuario [] lista = (Usuario[])usuarioDao.findAll("Usuario").toArray();
+			for(int i=0; i<lista.length; i++){
+				if(!lista[i].getUsuario().equals(usuario))
+					return true;
+			}
+		return false;
+	}
 	public void cadastrarAdministrador(Administrador adm) {
+		administradorDao = new Dao<Administrador>();
 		administradorDao.persist(adm);
 	}
 
-	@Override
+
 	public void cadastrarMedico(Medico medico) {
-		medicodaDao.persist(medico);
+		medicoDao = new Dao<Medico>();
+		medicoDao.persist(medico);
 	}
 
-	@Override
+	
 	public void cadastrarPaciente(Paciente paciente) {
+		pacienteDao = new Dao<Paciente>();
 		pacienteDao.persist(paciente);
 	}
 
-	@Override
+	
 	public void cadastrarAtendente(Atendente atendente) {
+		atendenteDao = new Dao<Atendente>();
 		atendenteDao.persist(atendente);
 	}
 
-	@Override
+	
 	public void cadastrarProcedimento(Procedimento pr) {
+		procedimentoDao = new Dao<Procedimento>();
 		procedimentoDao.persist(pr);
 	}
 
-	@Override
+
 	public void cadastrarEspecialidade(Especialidade e) {
+		especialidadeDao = new Dao<Especialidade>();
 		especialidadeDao.persist(e);
 	}
 
-	@Override
+	
 	public void cadastrarConvenio(Convenio c) {
+		convenioDao = new Dao<Convenio>();
 		convenioDao.persist(c);
 	}
 
-	@Override
+	
 	public Administrador[] listarAdministrador() {
-		return null;
+		administradorDao = new Dao<Administrador>();
+		Administrador [] lista = (Administrador [])administradorDao.findAll("Administrador").toArray();
+		return lista;
 	}
 
-	@Override
+	
 	public Medico[] listarMedico() {
-		return null;
+		medicoDao = new Dao<Medico>();
+		Medico [] lista = (Medico [])medicoDao.findAll("Medico").toArray();
+		return lista;
 	}
 
-	@Override
+	
 	public Paciente[] listarPaciente() {
-		return null;
+		pacienteDao = new Dao<Paciente>();
+		Paciente [] lista = (Paciente [])pacienteDao.findAll("Medico").toArray();
+		return lista;
 	}
 
-	@Override
+	
 	public Atendente[] listarAtendente() {
-		return null;
+		atendenteDao = new Dao<Atendente>();
+		Atendente [] lista = (Atendente [])atendenteDao.findAll("Atendente").toArray();
+		return lista;
 	}
 
-	@Override
+	
 	public Procedimento[] listarProcedimento() {
-		return null;
+		procedimentoDao = new Dao<Procedimento>();
+		Procedimento [] lista = (Procedimento[])procedimentoDao.findAll("Procedimento").toArray();
+		return lista;
 	}
 
-	@Override
+	
 	public Especialidade[] listarEspecialidade() {
-		return null;
+		especialidadeDao = new Dao<Especialidade>();
+		Especialidade [] lista = (Especialidade[])especialidadeDao.findAll("Especialidade").toArray();
+		return lista;
 	}
 
-	@Override
+	
 	public Convenio[] listarConvenio() {
-		return null;
+		convenioDao = new Dao<Convenio>();
+		Convenio [] lista = (Convenio[])convenioDao.findAll("Convenio").toArray();
+		return lista;
 	}
+	
+	public void excluirPaciente(Paciente p){
+		pacienteDao = new Dao<Paciente>();
+		pacienteDao.remove(p);
+		
+	}
+	
+
 
 }
