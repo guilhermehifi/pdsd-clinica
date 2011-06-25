@@ -18,7 +18,7 @@ public class Administrador {
 	@GeneratedValue(generator="seq", strategy = GenerationType.AUTO)
 	private int id;
 	
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id_usuario")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 	
