@@ -47,7 +47,7 @@ public class Agenda implements Serializable {
 
 	}
 
-	public Agenda(Procedimento procedimento, Date data, String horario,
+	public Agenda(TipoProcedimento tipo, Date data, String horario,
 			Medico medico, Paciente paciente, boolean agendado) {
 		this.data = data;
 		this.horario = horario;
