@@ -15,11 +15,17 @@
   <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
   <!--  mapping classes -->
   <mapping class="ifrn.pds.model.Endereco" />
+  <mapping class="ifrn.pds.model.Convenio" />
   <mapping class="ifrn.pds.model.Usuario" />
+  <mapping class="ifrn.pds.model.Administrador" />
+  <mapping class="ifrn.pds.model.Atendente" />
   <mapping class="ifrn.pds.model.Medico" />
   <mapping class="ifrn.pds.model.Paciente" />
   <mapping class="ifrn.pds.model.Agenda" />
+  <mapping class="ifrn.pds.model.TipoProcedimento" />
   <mapping class="ifrn.pds.model.Procedimento" />
   <mapping class="ifrn.pds.model.Especialidade" />
+  <mapping class="ifrn.pds.model.Receita" />
+  <mapping class="ifrn.pds.model.Prontuario" />
  </session-factory>
 </hibernate-configuration>
