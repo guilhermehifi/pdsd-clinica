@@ -2,6 +2,7 @@ package ifrn.pds.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,13 +21,13 @@ public class Procedimento implements Serializable{
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
 	@JoinColumn(name = "tipoprocedimento_id")
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private TipoProcedimento tipoProcedimento;
-	@JoinColumn(name = "Medico")
-	@ManyToOne
+	@JoinColumn(name = "medico_id")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Medico medico;
-	@JoinColumn(name = "Paciente")
-	@ManyToOne
+	@JoinColumn(name = "paciente_id")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Paciente paciente;
 	private String anamnese;
 	private String diagnostico;

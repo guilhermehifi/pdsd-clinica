@@ -1,5 +1,6 @@
 package ifrn.pds.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,14 +19,22 @@ public class Administrador {
 	private int id;
 	
 	@JoinColumn(name = "id")
-	@OneToOne
-	public Usuario usuario;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Usuario usuario;
 	
 	public Administrador(){
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

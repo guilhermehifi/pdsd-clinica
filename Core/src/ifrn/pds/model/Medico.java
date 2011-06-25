@@ -1,5 +1,6 @@
 package ifrn.pds.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Medico  /*extends Usuario*/ {
 	private int id;
 	
 	@JoinColumn(name = "id")
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 	/*
 	private String usuario;
@@ -41,18 +42,18 @@ public class Medico  /*extends Usuario*/ {
 	
 	//@JoinColumn(name = "Especialidade")
 	//@OneToMany(fetch = FetchType.EAGER)
-	@IndexColumn(name = "id")
-	private Especialidade[] especialidades;
-
-	//@JoinColumn(name = "Procedimento")
-	//@OneToMany
-	@IndexColumn(name = "id")
-	private Procedimento[] procedimentos;
-	
-	//@JoinColumn(name="Agenda")
-	//@OneToMany
-	@IndexColumn(name = "id")
-	private Agenda[] agenda;
+//	@IndexColumn(name = "id")
+//	private Especialidade[] especialidades;
+//
+//	//@JoinColumn(name = "Procedimento")
+//	//@OneToMany
+//	@IndexColumn(name = "id")
+//	private Procedimento[] procedimentos;
+//	
+//	//@JoinColumn(name="Agenda")
+//	//@OneToMany
+//	@IndexColumn(name = "id")
+//	private Agenda[] agenda;
 	
 
 	public Medico() {
@@ -158,29 +159,29 @@ public class Medico  /*extends Usuario*/ {
 		this.endereco = endereco;
 	}
 */
-	public Especialidade[] getEspecialidades() {
-		return especialidades;
-	}
-
-	public void setEspecialidades(Especialidade[] especialidades) {
-		this.especialidades = especialidades;
-	}
-
-	public Procedimento[] getProcedimentos() {
-		return procedimentos;
-	}
-
-	public void setProcedimentos(Procedimento[] procedimentos) {
-		this.procedimentos = procedimentos;
-	}
-
-	public Agenda[] getAgenda() {
-		return agenda;
-	}
-
-	public void setAgenda(Agenda[] agenda) {
-		this.agenda = agenda;
-	}
+//	public Especialidade[] getEspecialidades() {
+//		return especialidades;
+//	}
+//
+//	public void setEspecialidades(Especialidade[] especialidades) {
+//		this.especialidades = especialidades;
+//	}
+//
+//	public Procedimento[] getProcedimentos() {
+//		return procedimentos;
+//	}
+//
+//	public void setProcedimentos(Procedimento[] procedimentos) {
+//		this.procedimentos = procedimentos;
+//	}
+//
+//	public Agenda[] getAgenda() {
+//		return agenda;
+//	}
+//
+//	public void setAgenda(Agenda[] agenda) {
+//		this.agenda = agenda;
+//	}
 
 	public int getId() {
 		return id;

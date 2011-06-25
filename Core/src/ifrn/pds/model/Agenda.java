@@ -3,12 +3,12 @@ package ifrn.pds.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,7 +22,9 @@ public class Agenda implements Serializable {
 	@Id
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
-	@ManyToOne
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "procedimento_id")
 	private Procedimento procedimento;
 
 	@Temporal(TemporalType.DATE)
@@ -30,15 +32,17 @@ public class Agenda implements Serializable {
 	
 	private String horario;
 
-	@ManyToOne
-	private Medico medico;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "medico_id")
+	private Medico medico;	
 
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 	
 	private boolean agendado;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "tipoprocedimento_id")
 	private TipoProcedimento tipoProcedimento;
 	
