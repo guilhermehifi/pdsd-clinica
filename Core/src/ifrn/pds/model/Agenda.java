@@ -23,10 +23,6 @@ public class Agenda implements Serializable {
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "procedimento_id")
-	private Procedimento procedimento;
-
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
@@ -53,20 +49,11 @@ public class Agenda implements Serializable {
 
 	public Agenda(Procedimento procedimento, Date data, String horario,
 			Medico medico, Paciente paciente, boolean agendado) {
-		this.procedimento = procedimento;
 		this.data = data;
 		this.horario = horario;
 		this.medico = medico;
 		this.paciente = paciente;
 		this.agendado = agendado;
-	}
-
-	public Procedimento getProcedimento() {
-		return procedimento;
-	}
-
-	public void setProcedimento(Procedimento procedimento) {
-		this.procedimento = procedimento;
 	}
 
 	public Medico getMedico() {

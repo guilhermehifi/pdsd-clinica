@@ -27,6 +27,10 @@ public class Prontuario implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "procedimento_id")
+	private Procedimento procedimento;
 
 //	//@OneToMany(mappedBy = "id")
 //	@IndexColumn(name = "id")
@@ -66,6 +70,14 @@ public class Prontuario implements Serializable {
 
 	public int getId() {
 		return id;
+	}
+
+	public Procedimento getProcedimento() {
+		return procedimento;
+	}
+
+	public void setProcedimento(Procedimento procedimento) {
+		this.procedimento = procedimento;
 	}
 
 }
