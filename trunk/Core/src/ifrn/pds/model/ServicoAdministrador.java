@@ -1,5 +1,7 @@
 package ifrn.pds.model;
 
+import javax.persistence.NoResultException;
+
 import ifrn.pds.dao.Dao;
 
 
@@ -16,13 +18,14 @@ public class ServicoAdministrador  {
 
 	public boolean isDisponivel(String usuario){
 		usuarioDao = new Dao<Usuario>();
-		Usuario [] lista = (Usuario[])usuarioDao.findAll("Usuario").toArray();
-			for(int i=0; i<lista.length; i++){
-				if(!lista[i].getUsuario().equals(usuario))
-					return true;
-			}
-		return false;
+		try {
+			usuarioDao.findByExample("Usuario", "usuario", "'"+usuario+"'");
+			return true;
+		} catch (NoResultException e) {
+			return false;
+		}
 	}
+	
 	public void cadastrarAdministrador(Administrador adm) {
 		administradorDao = new Dao<Administrador>();
 		administradorDao.persist(adm);
@@ -40,12 +43,10 @@ public class ServicoAdministrador  {
 		pacienteDao.persist(paciente);
 	}
 
-	
 	public void cadastrarAtendente(Atendente atendente) {
 		atendenteDao = new Dao<Atendente>();
 		atendenteDao.persist(atendente);
 	}
-
 	
 	public void cadastrarProcedimento(Procedimento pr) {
 		procedimentoDao = new Dao<Procedimento>();
