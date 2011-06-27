@@ -119,9 +119,9 @@ public class ImplServidor implements InterfaceRemotaServidor{
 		return m;
 	}
 
-	public Paciente pacienteId(int id) throws RemoteException {
+	public Paciente pacienteId(int id){
 		pacienteDAO = new Dao<Paciente>();
-		return pacienteDAO.findByExample("Paciente", "usuario_id", new Integer(id).toString());
+		return pacienteDAO.findById("Paciente", id);
 	}
 
 }
