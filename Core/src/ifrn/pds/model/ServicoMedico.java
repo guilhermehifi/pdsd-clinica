@@ -7,32 +7,67 @@
 
 package ifrn.pds.model;
 
+import java.util.List;
+
+import javax.persistence.NoResultException;
+
 import ifrn.pds.dao.Dao;
-import ifrn.pds.interfaces.IServicoMedico;
 
 
 
-public class ServicoMedico implements IServicoMedico{
-	private Dao<Medico> medicoDao = new Dao<Medico>();
-	private Dao<Especialidade> especialidadeDao = new Dao<Especialidade>();
+public class ServicoMedico{
+	private Dao<Medico> medicoDao;
+	private Dao<Usuario> usuarioDao;
 	
-	@Override
+	public Medico efetuarLogin(String usuario, String senha) {
+		try {
+			usuarioDao = new Dao<Usuario>();
+			Usuario u = usuarioDao.findByExample("Usuario", "usuario", "'"
+					+ usuario + "'");
+			if (u != null) {
+				medicoDao = new Dao<Medico>();
+				Medico m = medicoDao.findByExample("Medico", "id_usuario", new Integer(u.getId()).toString());
+				if(m.getUsuario().getSenha().equals(senha))
+					return m;
+			}
+		} catch (NoResultException e) {
+			return null;
+		}
+		return null;
+	}
+	
+	public Agenda[] listarAgendamento(int id, String data) {
+		Dao<Agenda> agendaDao = new Dao<Agenda>();
+		System.out.println(id);
+		List<Agenda> lista = agendaDao.findByExampleLista("Agenda",
+				"medico_id", new Integer(id).toString() + " and data = '"
+						+ data + "'");
+		Agenda[] a = new Agenda[lista.size()];
+		for (int i = 0; i < lista.size(); i++) {
+			a[i] = lista.get(i);
+		}
+		return a;
+	}
+	
+	public Prontuario getProntuario(int idPaciente){
+		Prontuario p = new Dao<Prontuario>().findByExample("Prontuario", "paciente_id", new Integer(idPaciente).toString());
+		return p;
+	}
+	
 	public void cadastrarMedico(Medico medico) {
 		medicoDao.persist(medico);
 	}
 
-	@Override
 	public Medico buscarMedico(String login) {
-		Medico m = medicoDao.findByExample(Medico.class, "usuario", login);
+		Medico m = medicoDao.findByExample("Medico", "usuario", login);
 		return m;
 	}
 
-	@Override
+	//TODO
 	public Medico[] listarMedicos() {
-		return (Medico[]) medicoDao.findAll(Medico.class).toArray();
+		return (Medico[]) medicoDao.findAll("Medico").toArray();
 	}
 
-	@Override
 	public Especialidade[] listarEspecialidadeMedico(Medico medico) {
 		/*Especialidade[] es = (Especialidade[]) especialidadeDao.findAll(Especialidade.class).toArray();
 		Especialidade[] lista;

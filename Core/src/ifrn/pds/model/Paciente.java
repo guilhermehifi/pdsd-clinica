@@ -3,6 +3,7 @@ package ifrn.pds.model;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Paciente")
 @SequenceGenerator(name = "seq", sequenceName = "Usuario_id_seq")
-public class Paciente implements Serializable{
+public class Paciente implements Serializable {
 
 	private static final long serialVersionUID = 134L;
 
@@ -24,20 +25,24 @@ public class Paciente implements Serializable{
 	private int id;
 
 	@JoinColumn(name = "convenio_id")
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private Convenio convenio;
 
 	@JoinColumn(name = "id_usuario")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 
+	@Column(name = "numero_convenio")
+	private int numeroConvenio;
+
 	public Paciente() {
 
 	}
 
-	public Paciente(Convenio convenio, Usuario usuario) {
+	public Paciente(Convenio convenio, Usuario usuario, int numeroConvenio) {
 		this.convenio = convenio;
 		this.usuario = usuario;
+		this.numeroConvenio = numeroConvenio;
 	}
 
 	public Convenio getConvenio() {
@@ -58,6 +63,14 @@ public class Paciente implements Serializable{
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public int getNumeroConvenio() {
+		return numeroConvenio;
+	}
+
+	public void setNumeroConvenio(int numeroConvenio) {
+		this.numeroConvenio = numeroConvenio;
 	}
 
 }

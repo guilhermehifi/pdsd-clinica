@@ -10,7 +10,7 @@
   <property name="show_sql">true</property>
   <property name="connection.username">infoclin</property>
   <property name="connection.password">infoclin</property>
-  <property name="connection.pool_size">10</property>
+  <property name="connection.pool_size">100</property>
   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
   <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
   <!--  mapping classes -->
