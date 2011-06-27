@@ -24,7 +24,7 @@ public class Prontuario implements Serializable {
 	private int id;
 
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 	
