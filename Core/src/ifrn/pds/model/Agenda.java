@@ -31,12 +31,10 @@ public class Agenda implements Serializable {
 	private String horario;
 
 	@ManyToOne/*(cascade = CascadeType.ALL)*/
-	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "medico_id")
 	private Medico medico;	
 
-	//@ManyToOne
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 	
@@ -50,10 +48,9 @@ public class Agenda implements Serializable {
 	public Agenda() {
 
 	}
-	
-	//data, horario, medico_id, paciente_id, agendado, tipoprocedimento_id, id
 
-	public Agenda(Date data, String horario, Medico medico, Paciente paciente, boolean agendado, TipoProcedimento tipo) {
+	public Agenda(TipoProcedimento tipo, Date data, String horario,
+			Medico medico, Paciente paciente, boolean agendado) {
 		this.data = data;
 		this.horario = horario;
 		this.medico = medico;
