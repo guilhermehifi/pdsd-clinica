@@ -16,7 +16,7 @@ import org.hibernate.cfg.Configuration;
 //TODO Tratar algumas possíveis exceções!
 public class Dao<E> {
 	private EntityManager entityManager;
-	private Session session;
+	//private Session session;
 	
 	public Dao() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("infoclinPersistenceUnit");
@@ -72,6 +72,24 @@ public class Dao<E> {
 		E e = (E) q.getSingleResult();
 		entityManager.close();
 		return e; 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public E findByExampleLike(String classe, String nomeCampo, String valorCampo) {
+		conecta();
+		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " like '%" + valorCampo + "%'");
+		E e = (E) q.getSingleResult();
+		entityManager.close();
+		return e; 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<E> findByExampleLikeLista(String classe, String nomeCampo, String valorCampo) {
+		conecta();
+		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " like '%" + valorCampo + "%'");
+		List<E> lista = q.getResultList();
+		entityManager.close();
+		return lista; 
 	}
 	
 	@SuppressWarnings("unchecked")
