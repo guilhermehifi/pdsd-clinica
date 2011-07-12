@@ -20,19 +20,13 @@ import java.util.List;
 public class ImplServidor implements InterfaceRemotaServidor{
 	
 	private static final long serialVersionUID = 1L;
-	Dao<Paciente> pacienteDAO;
-	Dao<TipoProcedimento> tipoDAO;
-	Dao<Agenda> agendaDAO;
-	Dao<Medico> medicoDAO;
-	Dao<Usuario> usuarioDao;
-	
+	Dao dao = Dao.getDao();
 	public ImplServidor() throws RemoteException{
 		UnicastRemoteObject.exportObject(this);
 	}
 	
 	public void agendar(Date data, String hora, Medico medico, Paciente paciente, boolean agendado, TipoProcedimento tipoProcedimento)
 	throws RemoteException{
-		agendaDAO = new Dao<Agenda>();	
 		Agenda agenda = new Agenda();
 			agenda.setTipoProcedimento(tipoProcedimento);
 			agenda.setData(data);
@@ -40,25 +34,22 @@ public class ImplServidor implements InterfaceRemotaServidor{
 			agenda.setMedico(medico);
 			agenda.setPaciente(paciente);
 			agenda.setAgendado(false);
-			agendaDAO.persist(agenda);
+			dao.persist(agenda);
 	}
 	
 	public int acharUsuario(String usuario)throws RemoteException, PacienteException {
-		Dao<Usuario> usuarioDAO = new Dao<Usuario>();
-		Usuario u = usuarioDAO.findByExample("Usuario", "usuario", "'"+usuario+"'");
+		Usuario u = dao.findByExample("Usuario", "usuario", "'"+usuario+"'");
 				return u.getId();
 	}
 
 	public Usuario usuarioId(int id){
-		usuarioDao = new Dao<Usuario>();
-		return usuarioDao.findById("Usuario", id);
+		return dao.findById("Usuario", id);
 	}
 	
 	
 	//funcionando e testado
 	public TipoProcedimento [] listarProcedimentos() throws RemoteException{
-		tipoDAO = new Dao<TipoProcedimento>();
-		List <TipoProcedimento> proc = tipoDAO.findAll("TipoProcedimento");
+		List <TipoProcedimento> proc = dao.findAll("TipoProcedimento");
 		int qtd = proc.size();
 		TipoProcedimento [] tipo = new TipoProcedimento[qtd];
 			for(int i=0; i<proc.size(); i++){
@@ -85,11 +76,10 @@ public class ImplServidor implements InterfaceRemotaServidor{
 				}
 			}
 			
-		agendaDAO = new Dao<Agenda>();
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
         Date dat = (java.util.Date)formatter.parse(data);
 		try{
-			List<Agenda> listaAgenda = agendaDAO.findByExampleLista("Agenda", "data", "'" + dat + "'");
+			List<Agenda> listaAgenda = dao.findByExampleLista("Agenda", "data", "'" + dat + "'");
 			for(Agenda a : listaAgenda){
 				horarios.remove(a.getHorario());
 			}
@@ -100,18 +90,15 @@ public class ImplServidor implements InterfaceRemotaServidor{
 	}
 	
 	public Medico medicoId(int id){
-		medicoDAO = new Dao<Medico>();
-		return medicoDAO.findById("Medico", id);
+		return dao.findById("Medico", id);
 	}
 	
 	public TipoProcedimento tipoId(int id){
-		tipoDAO = new Dao<TipoProcedimento>();
-		return tipoDAO.findById("TipoProcedimento", id);
+		return dao.findById("TipoProcedimento", id);
 	}
 	
 	public Medico [] listarNomeMedicos()throws RemoteException{
-		medicoDAO = new Dao<Medico>();
-		List<Medico> lista = medicoDAO.findAll("Medico");
+		List<Medico> lista = dao.findAll("Medico");
 		Medico[] m = new Medico[lista.size()];
 		for (int i = 0; i < m.length; i++) {
 			m[i] = lista.get(i);
@@ -120,8 +107,7 @@ public class ImplServidor implements InterfaceRemotaServidor{
 	}
 
 	public Paciente pacienteId(int id){
-		pacienteDAO = new Dao<Paciente>();
-		return pacienteDAO.findById("Paciente", id);
+		return dao.findById("Paciente", id);
 	}
 
 }
