@@ -25,10 +25,18 @@ public class Medico  /*extends Usuario*/ implements Serializable{
 	@JoinColumn(name = "id_usuario")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
+	
+	private int crm;
 
 	public Medico() {
 	}
 	
+
+	public Medico(Usuario usuario, int crm) {
+		this.usuario = usuario;
+		this.crm = crm;
+	}
+
 
 	public int getId() {
 		return id;
@@ -44,6 +52,16 @@ public class Medico  /*extends Usuario*/ implements Serializable{
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+
+	public int getCrm() {
+		return crm;
+	}
+
+
+	public void setCrm(int crm) {
+		this.crm = crm;
 	}
 
 

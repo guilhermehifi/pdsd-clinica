@@ -14,40 +14,52 @@ import org.hibernate.cfg.Configuration;
 
 
 //TODO Tratar algumas possíveis exceções!
-public class Dao<E> {
+public class Dao {
 	private EntityManager entityManager;
-	//private Session session;
+	private Session session;
 	
-	public Dao() {
+	private Dao() {
+		System.err.println("NAAAAAAO");
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("infoclinPersistenceUnit");
 		entityManager = entityManagerFactory.createEntityManager();
-		//conecta();
-		//session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+		conecta();
+		session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+	}
+	public static class DaoHolder{
+		private static final Dao instance = new Dao();
+		
+		public static Dao getInstance(){
+			return instance;
+		}
+	}
+	
+	public static Dao getDao(){
+		return DaoHolder.getInstance();
 	}
 	
 	/*
 	 * GATO! Usando session ao inves do EntityManager. Nao esta muito elegante,  mas esta funcionando ;D
 	 */
-	public void persist(E entity) {
-		conecta();
+	public<E> void persist(E entity) {
+		//conecta();
 		//getTransaction();
-		Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+		//Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		 session.persist(entity);
 		 tx.commit();
 		//entityManager.persist(entity);
-		session.close();
+		//session.close();
 	}
 	
-	public void update(E entity){
-		conecta();
-		Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
+	public<E> void update(E entity){
+		//conecta();
+		//Session session = new AnnotationConfiguration().configure("hibernate.cfg.xml").buildSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		//E e = findById(classe, id);
 		session.merge(entity);
 		session.flush();
 		tx.commit();
-		session.close();
+		//session.close();
 	}
 
 	private void getTransaction() {
@@ -55,77 +67,77 @@ public class Dao<E> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<E> findAll(String classe) {
+	public<E> List<E> findAll(String classe) {
 		List<E> lista;
-		conecta();
+		//conecta();
 		Query q = entityManager.createQuery("select e from " + classe + " e");
 		lista = q.getResultList();
-		entityManager.close();
+		//entityManager.close();
 		return lista;
 	}
 
 	//método será usuado para fazer o controle de login
 	@SuppressWarnings("unchecked")
-	public E findByExample(String classe, String nomeCampo, String valorCampo) {
-		conecta();
+	public<E> E findByExample(String classe, String nomeCampo, String valorCampo) {
+		//conecta();
 		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " = " + valorCampo);
 		E e = (E) q.getSingleResult();
-		entityManager.close();
+		//entityManager.close();
 		return e; 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public E findByExampleLike(String classe, String nomeCampo, String valorCampo) {
-		conecta();
+	public<E> E findByExampleLike(String classe, String nomeCampo, String valorCampo) {
+		//conecta();
 		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " like '%" + valorCampo + "%'");
 		E e = (E) q.getSingleResult();
-		entityManager.close();
+		//entityManager.close();
 		return e; 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<E> findByExampleLikeLista(String classe, String nomeCampo, String valorCampo) {
-		conecta();
+	public<E> List<E> findByExampleLikeLista(String classe, String nomeCampo, String valorCampo) {
+		//conecta();
 		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " like '%" + valorCampo + "%'");
 		List<E> lista = q.getResultList();
-		entityManager.close();
+		//entityManager.close();
 		return lista; 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<E> findByExampleLista(String classe, String nomeCampo, String valorCampo) {
-		conecta();
+	public<E> List<E> findByExampleLista(String classe, String nomeCampo, String valorCampo) {
+		//conecta();
 		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where " + nomeCampo + " = " + valorCampo);
 		List<E> lista = q.getResultList();
-		entityManager.close();
+		//entityManager.close();
 		return lista;
 	}
 	
-	public E findById(String classe, int id) {
-		conecta();
+	public<E> E findById(String classe, int id) {
+		//conecta();
 		Query q = entityManager.createQuery("SELECT e FROM " + classe + " e where id" + " = " + id);
 		@SuppressWarnings("unchecked")
 		E e = (E)q.getSingleResult();
-		entityManager.close();
+		//entityManager.close();
 		return e;
 	}
 
-	public void remove(E entity) {
-		conecta();
+	public<E> void remove(E entity) {
+		//conecta();
 		getTransaction();
 		entityManager.remove(entity);
 		commit();
-		entityManager.close();
+		//entityManager.close();
 	}
 	
-	public boolean removeById(Class<E> classe, int id) {
-		conecta();
+	public<E> boolean removeById(Class<E> classe, int id) {
+		//conecta();
 		getTransaction();
 		Query q = entityManager.createQuery("DELETE FROM " + classe.getName()
 				+ " e where e.id = " + id);
 		int i = q.executeUpdate();
 		commit();
-		entityManager.close();
+		//entityManager.close();
 		return i == 1;
 	}
 

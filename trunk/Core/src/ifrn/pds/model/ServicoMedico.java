@@ -7,6 +7,7 @@
 
 package ifrn.pds.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -16,17 +17,18 @@ import ifrn.pds.dao.Dao;
 
 
 public class ServicoMedico{
-	private Dao<Medico> medicoDao;
-	private Dao<Usuario> usuarioDao;
+	private Dao dao = Dao.getDao();
+	
+	public ServicoMedico() {
+		//dao = getDao();
+	}
 	
 	public Medico efetuarLogin(String usuario, String senha) {
 		try {
-			usuarioDao = new Dao<Usuario>();
-			Usuario u = usuarioDao.findByExample("Usuario", "usuario", "'"
+			Usuario u = dao.findByExample("Usuario", "usuario", "'"
 					+ usuario + "'");
 			if (u != null) {
-				medicoDao = new Dao<Medico>();
-				Medico m = medicoDao.findByExample("Medico", "id_usuario", new Integer(u.getId()).toString());
+				Medico m = dao.findByExample("Medico", "id_usuario", new Integer(u.getId()).toString());
 				if(m.getUsuario().getSenha().equals(senha))
 					return m;
 			}
@@ -37,9 +39,8 @@ public class ServicoMedico{
 	}
 	
 	public Agenda[] listarAgendamento(int id, String data) {
-		Dao<Agenda> agendaDao = new Dao<Agenda>();
 		System.out.println(id);
-		List<Agenda> lista = agendaDao.findByExampleLista("Agenda",
+		List<Agenda> lista = dao.findByExampleLista("Agenda",
 				"medico_id", new Integer(id).toString() + " and data = '"
 						+ data + "'");
 		Agenda[] a = new Agenda[lista.size()];
@@ -49,33 +50,53 @@ public class ServicoMedico{
 		return a;
 	}
 	
+	public Procedimento[] listarProcedimentos(int idProntuario){
+		List<Procedimento> p = dao.findByExampleLista("Procedimento", "prontuario_id", new Integer(idProntuario).toString());
+		Procedimento[] procedimentos = new Procedimento[p.size()];
+		for (int i = 0; i < procedimentos.length; i++) {
+			procedimentos[i] = p.get(i);
+		}
+		return procedimentos;
+	}
+	
+	public void novoProcedimento(int idTipoProcedimento, int idMedico, int idProntuario, String anamnese, String diagnostico, Date data){
+		TipoProcedimento tipoProcedimento = dao.findById("TipoProcedimento", idTipoProcedimento);
+		Medico medico = dao.findById("Medico", idMedico);
+		Prontuario prontuario = dao.findById("Prontuario", idProntuario);
+		Paciente paciente = prontuario.getPaciente();
+		
+		Procedimento procedimento = new Procedimento(tipoProcedimento, medico, paciente, prontuario, data, anamnese, diagnostico);
+		dao.persist(procedimento);
+	}
+	
+	public Receita inserirReceita(int idProntuario, String receituario){
+		Prontuario prontuario = dao.findById("Prontuario", idProntuario);
+		Receita receita = new Receita(receituario, prontuario);
+		dao.persist(receita);
+		return receita;
+	}
+	
+	public Receita[] listarReceitas(int idProntuario){
+		try {
+			List<Receita> lista = dao.findByExampleLista("Receita", "prontuario_id", new Integer(idProntuario).toString());
+			Receita[] receitas = new Receita[lista.size()];
+			for (int i = 0; i < receitas.length; i++) {
+				receitas[i] = lista.get(i);
+			}
+			return receitas;
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	
 	public Prontuario getProntuario(int idPaciente){
-		Prontuario p = new Dao<Prontuario>().findByExample("Prontuario", "paciente_id", new Integer(idPaciente).toString());
+		Prontuario p = dao.findByExample("Prontuario", "paciente_id", new Integer(idPaciente).toString());
 		return p;
 	}
 	
-	public void cadastrarMedico(Medico medico) {
-		medicoDao.persist(medico);
-	}
-
+	
 	public Medico buscarMedico(String login) {
-		Medico m = medicoDao.findByExample("Medico", "usuario", login);
+		Medico m = dao.findByExample("Medico", "usuario", login);
 		return m;
 	}
-
-	//TODO
-	public Medico[] listarMedicos() {
-		return (Medico[]) medicoDao.findAll("Medico").toArray();
-	}
-
-	public Especialidade[] listarEspecialidadeMedico(Medico medico) {
-		/*Especialidade[] es = (Especialidade[]) especialidadeDao.findAll(Especialidade.class).toArray();
-		Especialidade[] lista;
-		for (Especialidade especialidade : es) {
-			if(especialidade.get)
-		}
-		return especialidadeDao.findByExample(Especialidade.class, "medico_id", medico.getId());*/
-		return null;
-	}
-	
 }

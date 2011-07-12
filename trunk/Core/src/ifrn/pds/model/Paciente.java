@@ -1,6 +1,7 @@
 package ifrn.pds.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Paciente")
@@ -34,6 +37,9 @@ public class Paciente implements Serializable {
 
 	@Column(name = "numero_convenio")
 	private int numeroConvenio;
+	
+	@Temporal(TemporalType.DATE)
+	private Date nascimento;
 
 	public Paciente() {
 
@@ -71,6 +77,14 @@ public class Paciente implements Serializable {
 
 	public void setNumeroConvenio(int numeroConvenio) {
 		this.numeroConvenio = numeroConvenio;
+	}
+
+	public java.sql.Date getNascimento() {
+		return new java.sql.Date(nascimento.getTime());
+	}
+
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
 	}
 
 }
