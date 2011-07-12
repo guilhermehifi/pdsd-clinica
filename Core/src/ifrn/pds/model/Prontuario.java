@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -28,9 +29,9 @@ public class Prontuario implements Serializable {
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "procedimento_id")
-	private Procedimento procedimento;
+//	@ManyToOne
+//	@JoinColumn(name = "procedimento_id")
+//	private Procedimento procedimento;
 
 //	//@OneToMany(mappedBy = "id")
 //	@IndexColumn(name = "id")
@@ -72,12 +73,12 @@ public class Prontuario implements Serializable {
 		return id;
 	}
 
-	public Procedimento getProcedimento() {
-		return procedimento;
-	}
-
-	public void setProcedimento(Procedimento procedimento) {
-		this.procedimento = procedimento;
-	}
+//	public Procedimento getProcedimento() {
+//		return procedimento;
+//	}
+//
+//	public void setProcedimento(Procedimento procedimento) {
+//		this.procedimento = procedimento;
+//	}
 
 }

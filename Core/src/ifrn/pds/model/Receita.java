@@ -2,7 +2,6 @@ package ifrn.pds.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,20 +19,16 @@ public class Receita implements Serializable {
 	@GeneratedValue(generator = "seq", strategy = GenerationType.AUTO)
 	private int id;
 	private String receituario;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "procedimento_id")
-	private Procedimento procedimento;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "prontuario_id")
 	private Prontuario prontuario;
 
 	public Receita() {
 
 	}
 
-	public Receita(String receituario, Procedimento procedimento,
-			Prontuario prontuario) {
+	public Receita(String receituario, Prontuario prontuario) {
 		this.receituario = receituario;
-		this.procedimento = procedimento;
 		this.prontuario = prontuario;
 	}
 
@@ -43,14 +38,6 @@ public class Receita implements Serializable {
 
 	public void setReceituario(String receituario) {
 		this.receituario = receituario;
-	}
-
-	public Procedimento getProcedimento() {
-		return procedimento;
-	}
-
-	public void setProcedimento(Procedimento procedimento) {
-		this.procedimento = procedimento;
 	}
 
 	public Prontuario getProntuario() {

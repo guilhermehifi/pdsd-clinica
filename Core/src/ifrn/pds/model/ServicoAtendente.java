@@ -12,26 +12,21 @@ import javax.persistence.NoResultException;
 
 public class ServicoAtendente{
 
-	private Dao<Paciente> pacienteDao;
-	private Dao<Agenda> agendaDao;
-	private Dao<Medico> medicoDao;
-	private Dao<Convenio> convenioDao;
-	private Dao<Usuario> usuarioDao;
-	private Dao<Prontuario> prontuarioDao;
-	private Dao<Procedimento> procedimentoDao;
-	private Dao<TipoProcedimento> tipoProcedimentoDao;
+	private Dao dao = Dao.getDao();
 
+	public ServicoAtendente() {
+		//dao = new Dao();
+	}
+	
 	public Paciente[] buscarPaciente(String nome) {
-		usuarioDao = new Dao<Usuario>();
-		List<Usuario> u = usuarioDao.findByExampleLikeLista("Usuario", "nome", nome);
+		List<Usuario> u = dao.findByExampleLikeLista("Usuario", "nome", nome);
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 		
 		for (Usuario us : u) {
-			pacienteDao = new Dao<Paciente>();
 			System.out.println(us.getId());
 			Paciente pa;
 			try {
-				pa = pacienteDao.findByExample("Paciente", "id_usuario", new Integer(us.getId()).toString());
+				pa = dao.findByExample("Paciente", "id_usuario", new Integer(us.getId()).toString());
 				pacientes.add(pa);
 			} catch (NoResultException e) {
 				System.out.println("non achou");
@@ -45,7 +40,7 @@ public class ServicoAtendente{
 		return p;
 	}
 
-	public void cadastrarPaciente(String usuario, String senha, String nome, String sexo, int telefone, 
+	public void cadastrarPaciente(String usuario, String senha, String nome, Date nascimento, String sexo, int telefone, 
 			String email, int cpf, int rg, String rua,
 			int numero, String complemento, String bairro, int cep, String cidade, String estado,
 			int idConvenio, int numeroConvenio) {
@@ -53,30 +48,29 @@ public class ServicoAtendente{
 		Usuario u = new Usuario(senha, usuario, endereco, nome, cpf, rg, sexo, telefone, email);
 		u.setEndereco(endereco);
 		
-		convenioDao = new Dao<Convenio>();
-		Convenio convenio = convenioDao.findById("Convenio", idConvenio);
+		Convenio convenio = dao.findById("Convenio", idConvenio);
 		
 		Paciente paciente = new Paciente(convenio, u, numeroConvenio);
+		Calendar c = new GregorianCalendar();
+		c.setTime(nascimento);
+		c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH ) + 1);
+		paciente.setNascimento(nascimento);
 		
-		pacienteDao = new Dao<Paciente>();
-		pacienteDao.persist(paciente);
+		dao.persist(paciente);
 		
-		prontuarioDao = new Dao<Prontuario>();
 		Prontuario prontuario = new Prontuario();
 		prontuario.setPaciente(paciente);
-		prontuarioDao.persist(prontuario);
+		dao.persist(prontuario);
 	}
 
 	public void excluirAgendamento(int id) {
-		agendaDao = new Dao<Agenda>();
-		Agenda agenda = agendaDao.findById("Agenda", id);
+		Agenda agenda = dao.findById("Agenda", id);
 		agenda.setAgendado(false);
-		agendaDao.update(agenda);
+		dao.update(agenda);
 	}
 
 	public Procedimento getProcedimento(Prontuario p) {
-		procedimentoDao = new Dao<Procedimento>();
-		Procedimento pr = procedimentoDao.findByExample("Procedimento", "id",
+		Procedimento pr = dao.findByExample("Procedimento", "id",
 				new Integer(p.getId()).toString());
 		return pr;
 	}
@@ -84,8 +78,7 @@ public class ServicoAtendente{
 	public Prontuario getProntuario(int idPaciente) {
 		Prontuario pr;
 		try {
-			prontuarioDao = new Dao<Prontuario>();
-			pr = prontuarioDao.findByExample("Prontuario",
+			pr = dao.findByExample("Prontuario",
 					"paciente_id", new Integer(idPaciente).toString());
 			return pr;
 		} catch (NoResultException e) {
@@ -94,8 +87,7 @@ public class ServicoAtendente{
 	}
 
 	public void salvarAlteracoes(int id, String novoHorario, int idNovoEspecialista, int idConvenio, int dia, int mes, int ano) {
-		agendaDao = new Dao<Agenda>();
-		Agenda agenda = agendaDao.findById("Agenda", id);
+		Agenda agenda = dao.findById("Agenda", id);
 		//agenda.setAgendado(true);
 		agenda.setHorario(novoHorario);
 		Calendar c = new GregorianCalendar();
@@ -103,25 +95,23 @@ public class ServicoAtendente{
 		System.out.println(c.getTime());
 		agenda.setData(c.getTime());
 		
-		Convenio co = new Dao<Convenio>().findById("Convenio", idConvenio);
+		Convenio co = dao.findById("Convenio", idConvenio);
 		agenda.getPaciente().setConvenio(co);
 		
-		Medico m = new Dao<Medico>().findById("Medico", idNovoEspecialista);
+		Medico m = dao.findById("Medico", idNovoEspecialista);
 		agenda.setMedico(m);
 		
-		agendaDao.update(agenda);
+		dao.update(agenda);
 	}
 
 	public void confirmarAgendamento(int id) {
-		agendaDao = new Dao<Agenda>();
-		Agenda agenda = agendaDao.findById("Agenda", id);
+		Agenda agenda = dao.findById("Agenda", id);
 		agenda.setAgendado(true);
-		agendaDao.update(agenda);
+		dao.update(agenda);
 	}
 
 	public Medico[] listarEspecialista() {
-		medicoDao = new Dao<Medico>();
-		List<Medico> lista = medicoDao.findAll("Medico");
+		List<Medico> lista = dao.findAll("Medico");
 		Medico[] m = new Medico[lista.size()];
 		for (int i = 0; i < m.length; i++) {
 			m[i] = lista.get(i);
@@ -130,9 +120,8 @@ public class ServicoAtendente{
 	}
 
 	public Agenda[] listarAgendamento(int id, String data) {
-		agendaDao = new Dao<Agenda>();
 		System.out.println(id);
-		List<Agenda> lista = agendaDao.findByExampleLista("Agenda",
+		List<Agenda> lista = dao.findByExampleLista("Agenda",
 				"medico_id", new Integer(id).toString() + " and data = '"
 						+ data + "'");
 		Agenda[] a = new Agenda[lista.size()];
@@ -143,8 +132,7 @@ public class ServicoAtendente{
 	}
 
 	public Convenio[] listarConvenio() {
-		convenioDao = new Dao<Convenio>();
-		List<Convenio> lista = convenioDao.findAll("Convenio");
+		List<Convenio> lista = dao.findAll("Convenio");
 		Convenio[] c = new Convenio[lista.size()];
 		for (int i = 0; i < c.length; i++) {
 			c[i] = lista.get(i);
@@ -153,9 +141,8 @@ public class ServicoAtendente{
 	}
 
 	public boolean verificaDisponibilidade(String usuario) {
-		usuarioDao = new Dao<Usuario>();
 		try {
-			usuarioDao.findByExample("Usuario", "usuario", "'" + usuario + "'");
+			dao.findByExample("Usuario", "usuario", "'" + usuario + "'");
 		} catch (NoResultException e) {
 			return true;
 		}
@@ -164,12 +151,10 @@ public class ServicoAtendente{
 
 	public Atendente efetuarLogin(String usuario, String senha) {
 		try {
-			usuarioDao = new Dao<Usuario>();
-			Usuario u = usuarioDao.findByExample("Usuario", "usuario", "'"
+			Usuario u = dao.findByExample("Usuario", "usuario", "'"
 					+ usuario + "'");
 			if (u != null) {
-				Dao<Atendente> atendenteDao = new Dao<Atendente>();
-				Atendente a = atendenteDao.findByExample("Atendente", "id_usuario", new Integer(u.getId()).toString());
+				Atendente a = dao.findByExample("Atendente", "id_usuario", new Integer(u.getId()).toString());
 				if(a.getUsuario().getSenha().equals(senha))
 					return a;
 			}
@@ -206,9 +191,8 @@ public class ServicoAtendente{
 				}
 			}
 			
-		agendaDao = new Dao<Agenda>();
 		try{
-			List<Agenda> listaAgenda = agendaDao.findByExampleLista("Agenda", "data", "\"" + data + "\"");
+			List<Agenda> listaAgenda = dao.findByExampleLista("Agenda", "data", "'" + data + "'");
 
 			for(Agenda a : listaAgenda){
 				horarios.remove(a.getHorario());
@@ -220,8 +204,7 @@ public class ServicoAtendente{
 	}
 	
 	public TipoProcedimento[] listarTipoProcedimento(){
-		tipoProcedimentoDao = new Dao<TipoProcedimento>();
-		List<TipoProcedimento> tipos = tipoProcedimentoDao.findAll("TipoProcedimento");
+		List<TipoProcedimento> tipos = dao.findAll("TipoProcedimento");
 		TipoProcedimento[] lista = new TipoProcedimento[tipos.size()];
 		for (int i = 0; i < lista.length; i++) {
 			lista[i] = tipos.get(i);
@@ -230,18 +213,12 @@ public class ServicoAtendente{
 	}
 	
 	public void novoAgendamento(int idPaciente, int idMedico, Date data, int idTipoProcediemtno, String horario, int idConvenio){
-		agendaDao = new Dao<Agenda>();
-		tipoProcedimentoDao = new Dao<TipoProcedimento>();
-		medicoDao = new Dao<Medico>();
-		pacienteDao = new Dao<Paciente>();
-		usuarioDao = new Dao<Usuario>();
-		
 		TipoProcedimento tipo;
 		try {
-			Medico medico = medicoDao.findById("Medico", idMedico);
-			Paciente paciente = pacienteDao.findById("Paciente", idPaciente);
+			Medico medico = dao.findById("Medico", idMedico);
+			Paciente paciente = dao.findById("Paciente", idPaciente);
 			
-			tipo = tipoProcedimentoDao.findById("TipoProcedimento", idTipoProcediemtno);
+			tipo = dao.findById("TipoProcedimento", idTipoProcediemtno);
 			Agenda agenda = new Agenda();
 			agenda.setAgendado(false);
 			agenda.setData(data);
@@ -249,7 +226,7 @@ public class ServicoAtendente{
 			agenda.setMedico(medico);
 			agenda.setPaciente(paciente);
 			agenda.setTipoProcedimento(tipo);
-			agendaDao.persist(agenda);
+			dao.persist(agenda);
 		} catch (NoResultException e) {
 			e.printStackTrace();
 		}
